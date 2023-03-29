@@ -1,0 +1,48 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="headerToolbar">
+    <ion-title>
+        الرئيسية
+    </ion-title>
+    <ion-buttons slot="start">
+       <div (click)="functionOpenMenue()"><img src="../../assets/imgs/Group871.png" style="width:28px"></div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div style="padding:20px; padding-bottom:20px">
+    	<form style="display: contents;" (ngSubmit)="searchValues()">
+            <div class="paddingBottom">
+                <ion-item lines="none" class="{{errorPassword}}">
+                    <ion-input [type]="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="searchVal" placeholder="إبحث عن خدمة" (ionInput)="checkSearch($event.target.value)"></ion-input><ion-icon name="search-outline" class="eye" (click)="searchValues()"></ion-icon>
+                </ion-item>
+            </div>
+            <button style="visibility:hidden" id="submit" ion-button type="submit" ></button>
+  		</form>
+		<div>
+        	<img src="{{image}}">
+        </div>
+       <div *ngIf="categories!=0">
+         <ion-grid>
+            <ion-row>
+                <ion-col size="4" *ngFor="let items of returnCategoriesArray">
+                    <div (click)="functionGoServices(items.id,items.title)">
+                        <div><img src="{{items.image}}" class="categoriesHomeDiv"></div>
+                        <div class="categoriesHomeLabel">{{items.title}}</div>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+       </div>
+        <div class="divEmptyVal" *ngIf="categories==0">
+            <div>
+                <img src="../../assets/imgs/noData.png" style="width:150px; height:150px">
+            </div>
+            <div class="emptyFirstText">
+               لا يوجد بيانات 
+            </div>
+            <div class="emptyLastText">
+                نعتذر لا يوجد بيانات حاليا في التطبيق
+            </div>
+        </div>
+    </div>
+</ion-content>

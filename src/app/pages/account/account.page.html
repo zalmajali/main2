@@ -1,0 +1,117 @@
+<ion-header>
+  <ion-toolbar  class="headerToolbar">
+    <ion-title>
+        <div>
+            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                <ion-row>
+                    <ion-col class="textAlignStart" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                        	<img src="../../assets/imgs/logo.png" style="width:35px">
+                        </div>
+                    </ion-col>
+                     <ion-col class="textAlignCenter" size="8">
+                    	<div style="font-size:20px;color:#000000">
+                       {{accountTitle}}
+                        </div>
+                    </ion-col>
+                    <ion-col class="textAlignEnd" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                        <ion-badge *ngIf="newNotifications!=0" class="classValData" slot="start" mode='ios'>{{newNotifications}}</ion-badge>
+                        <ion-icon name="notifications" slot="icon-only" class="PNIcon"  (click)="functionPushNotifications()"></ion-icon>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="startWightCurv">
+        <div class="wightCurv"></div>
+    </div>
+     <div class="allPage">
+         <div class="marginTop20" style="padding-bottom: 100px;">
+            <form style="display: contents;" (ngSubmit)="updateAccount()">
+            <div class="paddingBottom12 textAlignCenter">
+                <img src="{{photo}}" class="userImage">
+            </div>
+             <div class="paddingBottom12">
+                <ion-item [ngStyle]="{'direction': dir}" lines="none" class="{{errorFullName}}">
+                    <ion-input type="text" [(ngModel)]="fullName" [ngModelOptions]="{standalone: true}" placeholder="{{placeholderFullName}}" (ionInput)="checkFullName($event.target.value)"></ion-input>
+                </ion-item>
+                <div class="errorTitle" [ngStyle]="{'direction': dir}" *ngIf="isErrorFullName == 0">{{isErrorFullNameMsg}}</div>
+            </div>
+			<div class="paddingBottom12">
+                <ion-item [ngStyle]="{'direction': dir}" lines="none" class="{{errorMobile}}">
+                    <ion-input type="text" [(ngModel)]="mobile" [ngModelOptions]="{standalone: true}" placeholder="{{placeholderMobile}}" (ionInput)="checkMobile($event.target.value)"></ion-input>
+                </ion-item>
+                <div class="errorTitle" [ngStyle]="{'direction': dir}" *ngIf="isErrorMobile == 0">{{isErrorMobileMsg}}</div>
+            </div>
+            
+            <div class="paddingBottom12">
+                <ion-item [ngStyle]="{'direction': dir}" lines="none" class="{{errorEmail}}">
+                    <ion-input type="text" [(ngModel)]="emailUser" [ngModelOptions]="{standalone: true}" placeholder="{{placeholderEmail}}" (ionInput)="checkEmail($event.target.value)"></ion-input>
+                </ion-item>
+                <div class="errorTitle" [ngStyle]="{'direction': dir}" *ngIf="isErrorEmail == 0">{{isErrorEmailMsg}}</div>
+            </div>
+            <div class="paddingBottom12">
+                <ion-item [ngStyle]="{'direction': dir}" lines="none">
+                    <ion-input [(ngModel)]="accountImage" [ngModelOptions]="{standalone: true}" [type]="text" readonly="true"  placeholder="{{accountImagela}}"></ion-input>
+                    <ion-icon name="cloud-upload" class="eye showPas" *ngIf="uplodeAccountImage == 0" (click)="uploadeAccountImage()"></ion-icon>
+                    <ion-icon name="trash" class="showPas" *ngIf="uplodeAccountImage == 1" (click)="removeFile()"></ion-icon>
+                </ion-item>
+                <div class="notTitle">{{allowedExtensions}}</div>
+            </div>
+             <div>
+              <div class="divButtonClass">
+                <ion-button class="oneButton fontSize14" (click)="updateAccount()" disabled="{{!isdisabled}}" id="submit">{{accountEdit}}</ion-button>
+              </div>
+            </div>
+            <button style="visibility:hidden" id="submit" ion-button type="submit" ></button>
+            </form>
+            
+        </div>
+     </div>
+     <!--department suberviser-->
+    <ion-footer  class="ion-no-border" style="position:fixed;bottom:0px">
+       <ion-toolbar class="footerToolbar">
+        <div class="width100">
+            <div class="menueClass" (click)="functionHome()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/home.png" style="width:18px"></div>
+            	<div class="labelClass">{{menu5}}</div>
+            </div>
+            <div class="menueClass menueClassActive" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/informationSelected.png" style="width:18px"></div>
+                <div class="labelClass">{{menu7}}</div>
+            </div>
+            <div class="menueClass" [ngStyle]="{'float': float}" style="height:60px">
+            	<div></div>
+            </div>
+            <!--department suberviser-->
+            <div class="menueClass" *ngIf="departmentId!=1 && type=='suber'"  (click)="functionRequest()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/orders.png" style="width:18px"></div>
+                <div class="labelClass">{{menu6}}</div>
+            </div>
+             <!--department maneger-->
+            <div class="menueClass" *ngIf="type=='man' || type=='itMan'" (click)="functionTeam()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/team.png" style="width:18px"></div>
+                <div class="labelClass">{{menu8}}</div>
+            </div>
+            <!--department maneger-->
+            <div class="menueClass" *ngIf="departmentId==1 && type=='suber'"  (click)="functionNewtasks()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/orders.png" style="width:18px"></div>
+                <div class="labelClass">{{newTasks}}</div>
+            </div>
+            <!--department suberviser-->
+             <div class="menueClass" (click)="settings()"  [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/setting.png" style="width:18px"></div>
+                <div class="labelClass">{{menu3}}</div>
+            </div>
+        </div>
+        </ion-toolbar>
+    </ion-footer>
+        <div class="addImageCss" *ngIf="type=='itMan'"><img (click)="functionAllrequest()" src="../../assets/imgs/newRequest.png" class="addImageclass"></div>
+        <div class="addImageCss" *ngIf="type=='man' || (departmentId!=1 && type=='suber')"><img (click)="functionAddrequest()" src="../../assets/imgs/add.png" class="addImageclass"></div>
+        <div class="addImageCss" *ngIf="departmentId==1 && type=='suber'"><img (click)="functionProgressTasks()" src="../../assets/imgs/newRequest.png" class="addImageclass"></div>
+</ion-content>

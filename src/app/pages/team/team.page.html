@@ -1,0 +1,120 @@
+<ion-header>
+  <ion-toolbar  class="headerToolbar">
+    <ion-title>
+        <div>
+            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                <ion-row>
+                    <ion-col class="textAlignStart" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                        	<img src="../../assets/imgs/logo.png" style="width:35px">
+                        </div>
+                    </ion-col>
+                     <ion-col class="textAlignCenter" size="8">
+                    	<div style="font-size:20px;color:#000000">
+                       {{teamTitle}}
+                        </div>
+                    </ion-col>
+                    <ion-col class="textAlignEnd" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                        <ion-badge *ngIf="newNotifications!=0" class="classValData" slot="start" mode='ios'>{{newNotifications}}</ion-badge>
+                        <ion-icon name="notifications" slot="icon-only" class="PNIcon"  (click)="functionPushNotifications()"></ion-icon>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="startWightCurv">
+        <div class="wightCurv"></div>
+    </div>
+     <div class="allPage">
+         <div *ngIf="employees==1" >
+            <div style="padding-top:5px" *ngFor="let items of returnEmployeesArray;let i = index">
+            <ion-card [ngStyle]="{'background-color': items.style}">
+                <ion-card-content>
+                    <div style="display:-webkit-box">
+                        <div [ngStyle]="{'float': float}" class="divImage"><img src="{{items.photo}}" class="userImage"></div>
+                        <div [ngStyle]="{'float': float,'direction': dir}" class="divContant">
+                            <div class="teamInformation" style="font-size:14px;font-weight:bold;color:#D10000;">{{items.fullName}}</div>
+                            <div class="teamInformation" *ngIf="op==1">{{departmentName}}: {{items.departmentName}}</div>
+                            <div class="teamInformation" *ngIf="op==1">{{employeeJob}}: {{items.type}}</div>
+                            <div class="teamInformation">{{employeeEmail}}: <span style="color:#0f75bd" (click)="functionSendEmail(items.email)">{{items.email}}</span></div>
+                            <div class="teamInformation">{{employeeMobile}}: <span style="color:#0f75bd" (click)="functionCallNumber(items.mobile)">{{items.mobile}}</span><img src="../../assets/imgs/callicon.png" style="width:15px"></div>
+                            <div class="teamInformation">{{employeeLastEnter}}: {{items.lastLoginTime}}</div>
+                        </div>
+                    </div>
+                    <div class="divLine">&nbsp;</div>
+                    <div style="width:100%">
+                        <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                            <ion-row>
+                                <ion-col class="textAlignStart" size="4" style="padding:0px">
+                                    <div class="{{items.class}}">{{items.block}}</div>
+                                </ion-col>
+                                <ion-col class="teamChangeStatuse textAlignCenter" size="4" style="padding:0px">
+                                   <img *ngIf="items.blockTow==0" src="../../assets/imgs/hide.png" (click)="functionBlockUnBlockUser(items.id,i,items.blockTow)" style="width:25px">
+                                   <img *ngIf="items.blockTow==1" src="../../assets/imgs/show.png" (click)="functionBlockUnBlockUser(items.id,i,items.blockTow)" style="width:25px">
+                                </ion-col>
+                                <ion-col class="textAlignEnd" *ngIf="getDataByUser==3" size="4" style="padding:0px">
+                                    <div class="teamStatus">
+                                        <img src="../../assets/imgs/list.png" style="width:25px;margin-left: 10px;margin-right: 10px;" (click)="functionTasks(items.id)">
+                                    	<img src="../../assets/imgs/userSeting.png" style="width:25px" *ngIf="items.viceManager==0 && items.blockTow!=1" (click)="changeUserStatuse(items.id,i)">
+                                        <img *ngIf="items.viceManager==1 && items.blockTow!=1" src="../../assets/imgs/userSetingLight.png" style="width:25px" >
+                                    </div>
+                                </ion-col>
+                                <ion-col class="textAlignEnd" *ngIf="getDataByUser==2" size="4" style="padding:0px">
+                                    <div class="teamStatus">
+                                        <img src="../../assets/imgs/ordrsUser.png" style="width:25px;margin-left: 10px;margin-right: 10px;" (click)="functionOrders(items.id)">
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </div>
+                </ion-card-content>
+            </ion-card>
+            </div>
+         </div>
+         <div *ngIf="employees==0"  class="divEmptyVal">
+        	<div>
+                <img src="../../assets/imgs/noData.png" style="width:150px; height:150px">
+            </div>
+            <div class="emptyFirstText">
+               {{sorry}} 
+            </div>
+            <div class="emptyLastText">
+                {{sorryReson}}
+            </div>
+        </div>
+     </div>
+     <!--department suberviser-->
+    <ion-footer  class="ion-no-border" style="position:fixed;bottom:0px">
+       <ion-toolbar class="footerToolbar">
+        <div class="width100">
+            <div class="menueClass" (click)="functionHome()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/home.png" style="width:18px"></div>
+            	<div class="labelClass">{{menu5}}</div>
+            </div>
+            <div class="menueClass" (click)="functionAccount()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/information.png" style="width:18px"></div>
+                <div class="labelClass">{{menu7}}</div>
+            </div>
+            <div class="menueClass" [ngStyle]="{'float': float}" style="height:60px">
+            	<div></div>
+            </div>
+             <!--department maneger-->
+            <div class="menueClass menueClassActive" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/teamSelected.png" style="width:18px"></div>
+                <div class="labelClass">{{menu8}}</div>
+            </div>
+            <!--department maneger-->
+             <div class="menueClass" (click)="settings()"  [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/setting.png" style="width:18px"></div>
+                <div class="labelClass">{{menu3}}</div>
+            </div>
+        </div>
+        </ion-toolbar>
+    </ion-footer>
+        <div class="addImageCss"><img (click)="functionAddrequest()" src="../../assets/imgs/add.png" class="addImageclass"></div>
+</ion-content>

@@ -1,0 +1,221 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+.fontSize11{font-size:11px !important;}
+.fontSize12{font-size:12px !important;}
+.fontSize13{font-size:13px !important;}
+.fontSize14{font-size:14px !important;}
+.fontSize15{font-size:15px !important;}
+.fontSize16{font-size:16px !important;}
+.fontSize17{font-size:17px !important;}
+.fontSize18{font-size:18px !important;}
+.fontSize19{font-size:19px !important;}
+.fontSize20{font-size:20px !important;}
+.fontSize21{font-size:21px !important;}
+.fontSize22{font-size:22px !important;}
+.textAlignEnd{text-align:end}
+.textAlignStart{text-align:start}
+.textAlignCenter{text-align:center}
+.paddingBottom{padding-bottom:10px}
+.paddingBottom12{padding-bottom:12px}
+.paddingBottom5{padding-bottom:5px}
+.paddingBottom15{padding-bottom:15px}
+.paddingTop3{padding-top:3px}
+.paddingTop15{padding-top:15px}
+.paddinginline15{padding-inline-start:15px !important}
+.paddingTop5{padding-top:5px !important}
+.paddingTop8{padding-top:8px !important}
+.width50{width:50px}
+.width35{width:35px}
+.width100{width:100%}
+.padding0{padding:0px;}
+.padding10{padding:10px;}
+.padding7{padding:7px;}
+.padding5{padding:5px;}
+.marginTop15{margin-top:15px}
+.marginTop20{margin-top:20px}
+.marginLeft52{margin-Left:52px}
+.marginLeft68{margin-Left: 68px;}
+.height38{height:38px}
+.height45{height:45px}
+.verticalAlignTop{vertical-align:top}
+.swiper-pagination-bullet{ 
+	width:10px !important;
+	height:10px !important; 
+}
+.swiper-paginavtion-bullet-active{ 
+	background:#00ADEF !important;
+}
+.swiper-container{
+	position:inherit;
+}
+.toastStyleAr{
+	--background: linear-gradient(-90deg, #0F75BD, #00ADEF) !important;
+	--color: #ffffff;
+	--end:0px;
+	--start:0px;
+	--border-radius:0px;
+	--width:100%;
+	direction:rtl;
+	--max-width:100%;
+	--box-shadow:none;
+	    font-size: 13px !important;
+}
+.toastStyleEn{
+	--background: linear-gradient(-90deg, #00ADEF, #0F75BD) !important;
+	--color: #ffffff;
+	--end:0px;
+	--start:0px;
+	--border-radius:0px;
+	--width:100%;
+	--max-width:100%;
+	direction:ltr;
+	--box-shadow:none;
+	    font-size: 13px !important;
+}
+.loadingStyle{
+	--spinner-color: var(--ion-color-header);
+}
+.alertBac{
+	--background: linear-gradient(-90deg, #00ADEF, #5cd0fc) !important;
+}
+.alert-wrapper{
+	--background: linear-gradient(-90deg, #00ADEF, #5cd0fc) !important;
+}
+.picker-wrapper{
+	--background: linear-gradient(-90deg, #00ADEF, #5cd0fc) !important;
+}
+.alert-tappable.sc-ion-alert-ios{
+	height:30px;
+}
+.alert-message.sc-ion-alert-ios {
+  color: #ffffff;
+  font-size:14px; 
+}
+.alert-tappable.sc-ion-alert-md{
+	height:30px;
+}
+.alert-message.sc-ion-alert-md {
+  color: #ffffff;
+  font-size:14px; 
+}
+.picker-button {
+  color: #ffffff !important;
+  font-size:14px !important;
+}
+[aria-checked=true].sc-ion-alert-ios .alert-radio-label.sc-ion-alert-ios{
+	color: #ffffff !important;
+	border-color: #ffffff !important;
+}
+.alert-radio-inner{
+	color: #ffffff !important;
+	border-color: #ffffff !important;
+}
+.alert-radio-icon sc-ion-alert-ios{
+	color: #ffffff;
+}
+.alert-radio-label.sc-ion-alert-ios{
+	color: #ffffff;
+}
+.alert-button.sc-ion-alert-ios{
+	color: #ffffff;
+	font-weight:normal !important;
+	font-size: 14px;
+    padding-bottom: 5px;
+}
+[aria-checked=true].sc-ion-alert-md .alert-radio-label.sc-ion-alert-md{
+	color: #ffffff !important;
+	border-color: #ffffff !important;
+}
+.alert-radio-icon sc-ion-alert-md{
+	color: #ffffff;
+}
+.alert-radio-label.sc-ion-alert-md{
+	color: #ffffff;
+}
+.alert-button.sc-ion-alert-md{
+	color: #ffffff;
+	font-weight:normal !important;
+	font-size: 14px;
+    padding-bottom: 5px;
+}
+
+
+
+.modalFilterSortCss .modal-wrapper{
+	width:100%;
+	--height:100%;
+	border-radius:10px;
+	background: transparent !important;
+}
+.infinite-loading-text{
+	font-size:13px !important;
+	color:#dc4b24 !important;
+}
+.spinner-lines{
+	color:#dc4b24 !important;
+}
+#radioPro.radio-checked{
+	background-color:#00adef;
+	border-width: 0px 4px 2px 4px;
+}
+.picker-button{
+	font-weight: 100 !important;
+}
+.picker-columns.sc-ion-picker-ios{
+	    margin-top: 6px !important;
+    padding-top: 6px;
+}
+.sc-ion-select-popover{
+	color:var(--ion-color-menueColor) !important;
+	--color-checked:var(--ion-color-menueColor) !important;
+}
+.select-interface-option{
+	--min-height:40px;
+	font-size: 15px;
+	--border-color:var(--ion-color-menueColor) !important;
+	    --padding-start: 3px;
+}
+ion-select{
+	width:100%;
+	--padding-end:3px;
+}
+.select-icon-inner{
+	left:0px;
+	right:0px;
+}
+ion-title {
+   padding-inline: 26px !important;
+}
+.my-custom-class {
+  --background: #222;
+  --spinner-color: #fff;
+  color: #fff;
+}
+.loading-wrapper{
+	border-radius:5px !important;
+	background:#0F75BD !important;
+}

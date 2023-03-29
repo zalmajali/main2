@@ -1,0 +1,106 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="headerToolbar">
+    <ion-title>
+        <div class="palanceText"> رصيد الخدمات </div>
+        <div class="palancePoints">{{points}}</div>
+        <div class="point">نقطة<br>مقايضة</div>
+    </ion-title>
+    <ion-buttons slot="start">
+       <div (click)="functionOpenMenue()"><img src="../../assets/imgs/Group871.png" style="width:28px"></div>
+       <div (click)="functionPushNotifications()" style="padding-right:20px"><img src="../../assets/imgs/alert.png" style="width:17px"></div>
+       <ion-badge *ngIf="newNotifications!=0" class="classValData" slot="start" mode='ios'>{{newNotifications}}</ion-badge>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div style="padding-top:20px">
+       <div *ngIf="dataArch!=0">
+       	<div style="padding-bottom:25px;padding-right:10px; font-size:23px; color:#000000">سجل الدعوات</div>
+        <div style="width:100%">
+            <ion-grid style="padding:0px">
+                <ion-row>
+                    <ion-col style="padding:0px" size="6">
+                        <div class="borderTop"></div>
+                    </ion-col>
+                    <ion-col style="padding:0px" size="6">
+                        <div class="borderBottom"></div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid> 
+        </div>
+         <div style="width:100%; padding-bottom:10px">
+          <ion-grid style="padding:0px">
+            <ion-row style="padding:0px">
+                <ion-col style="padding:0px" size="3">
+                    <div class="dateTitle">التاريخ</div>
+                </ion-col>
+                <ion-col style="padding:0px" size="6">
+                   <div class="inviteTitle">التفاصيل</div>
+                </ion-col>
+                <ion-col style="padding:0px" size="3">
+                    <div class="mobiltTitle">رقم الهاتف</div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        </div>
+       <div style="width:100%" *ngFor="let items of returnInvitArray;let i = index">
+            <div style="width:100%">
+                <ion-grid class="classGrid">
+                    <ion-row style="padding:0px">
+                        <ion-col style="padding:0px" size="3">
+                            <div class="date">
+                                <div>{{items.dateOne}}</div>
+                                <div>{{items.dateTow}}</div>
+                            </div>
+                        </ion-col>
+                        <ion-col style="padding:0px" size="6">
+                           <div class="invite" *ngIf="items.reseexistUser == 1">لقد قمت بدعوة الصديق {{items.resUserName}}</div>
+                           <div class="invite" *ngIf="items.reseexistUser == 2">لقد قمت بدعوة الصديق غير معروف</div>
+                        </ion-col>
+                        <ion-col style="padding:0px" size="3">
+                            <div class="mobile">{{items.resUsermobile}}</div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+        	</div>
+       </div>
+       </div>
+        <div class="divEmptyVal" *ngIf="dataArch==0">
+            <div class="emptyFirstText">
+               لا يوجد بيانات، لم يتم تسجيل اي مستخدم من خلالك
+            </div>
+            <div>
+              <div class="divButtonClass">
+                <ion-button class="oneButtonTow fontSize18" id="submit" (click)="functionGoInvitations()"><span style="font-size:15px;padding-top:4px">قم بدعوة مقدم خدمة</span></ion-button>
+              </div>
+            </div>
+        </div>
+    </div>
+</ion-content>
+ <div class="menueValues"><img (click)="functionGoToSendPoint()" src="../../assets/imgs/sendPoint.png" style="width:70px"></div>
+        <ion-footer class="ion-no-border">
+        <ion-toolbar class="footerToolbar">
+            <div class="width100">
+                <div class="menueClass" (click)="functionGoToHome()">
+                    <div><img src="../../assets/imgs/Group862.png" style="width:20px"></div>
+                    <div class="labelClass">الرئيسية</div>
+                </div>
+                <div class="menueClass">
+                    <div><img src="../../assets/imgs/GroupSelect863.png" style="width:18px"></div>
+                    <div class="labelClass">الدعوات</div>
+                </div>
+                <div class="menueClass" (click)="functionGoToSendPoint()">
+                    <div style="height:28px"></div>
+                    <div class="labelClass" style="font-size:15px">إرسال نقاط</div>
+                </div>
+                <div class="menueClass" (click)="functionGoToArchives()">
+                    <div><img src="../../assets/imgs/Group865.png" style="width:18px"></div>
+                    <div class="labelClass">السجل</div>
+                </div>
+                <div class="menueClass" (click)="functionOpenAccount()">
+                    <div><img src="../../assets/imgs/Group866.png" style="width:18px"></div>
+                    <div class="labelClass">حسابي</div>
+                </div>
+            </div>
+        </ion-toolbar>
+        </ion-footer>

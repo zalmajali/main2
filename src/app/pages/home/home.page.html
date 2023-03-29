@@ -1,0 +1,176 @@
+<ion-header>
+  <ion-toolbar  class="headerToolbar">
+    <ion-title>
+        <div>
+            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                <ion-row>
+                    <ion-col class="textAlignStart" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                        	<img src="../../assets/imgs/logo.png" style="width:35px">
+                        </div>
+                    </ion-col>
+                     <ion-col class="textAlignCenter" size="8">
+                    	<div style="font-size:20px;color:#000000">
+                       {{menu5}}
+                        </div>
+                    </ion-col>
+                     <ion-col class="textAlignEnd" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                        <ion-badge *ngIf="newNotifications!=0" class="classValData" slot="start" mode='ios'>{{newNotifications}}</ion-badge>
+                        <ion-icon name="notifications" slot="icon-only" class="PNIcon"  (click)="functionPushNotifications()"></ion-icon>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="startWightCurv">
+        <div class="wightCurv"></div>
+    </div>
+     <div class="allPage">
+       <div>
+       	 <ion-card>
+            <ion-card-content>
+            	<div>
+                	<div [ngStyle]="{'float': float}" class="divImage"><img src="{{photo}}" class="userImage"></div>
+                    <div [ngStyle]="{'float': float,'direction': dir}" class="divContant">
+                    	<div class="cardContentHi">{{hello}}</div>
+                        <div class="cardContentName" style="font-weight:bold; font-size:14px">{{fullName}}</div>
+                        <div class="cardContentName">{{departmentName}}</div>
+                        <div class="cardContentName">{{selectUserValuesType}}</div>
+                    </div>
+                </div>
+            </ion-card-content>
+        </ion-card>
+       </div>
+       <div *ngIf="showFirstMenue == 1">
+       	 <ion-card style="border-radius:5px" [ngStyle]="{'background-color': showValuesClass}" (click)="functionChangeVal()">
+            <ion-card-content style="padding:0px">
+            	<div class="clickValues" [ngStyle]="{'float': float}">
+					{{ordersSystem}}
+                </div>
+                <div class="clickValuesIcon" [ngStyle]="{'float': floatTow}">
+					<ion-icon name="caret-{{iconValues}}-outline"></ion-icon>
+                </div>
+            </ion-card-content>
+        </ion-card>
+       </div>
+       <div *ngIf="showLastMenue == 1">
+       	 <ion-card style="border-radius:5px" [ngStyle]="{'background-color': showValuesTowClass}" (click)="functionChangeValTow()">
+            <ion-card-content style="padding:0px">
+            	<div class="clickValues" [ngStyle]="{'float': float}">
+					{{tasksSystem}}
+                </div>
+                <div class="clickValuesIcon" [ngStyle]="{'float': floatTow}">
+					<ion-icon name="caret-{{iconValuesTow}}-outline"></ion-icon>
+                </div>
+            </ion-card-content>
+        </ion-card>
+       </div>
+        <div>
+       	 <ion-card style="border-radius:5px" [ngStyle]="{'background-color': showValuesThreeClass}" (click)="functionChangeValThree()">
+            <ion-card-content style="padding:0px">
+            	<div class="clickValues" [ngStyle]="{'float': float}">
+					{{systemOperation}}
+                </div>
+                <div class="clickValuesIcon" [ngStyle]="{'float': floatTow}">
+					<ion-icon name="caret-{{iconValuesThree}}-outline"></ion-icon>
+                </div>
+            </ion-card-content>
+        </ion-card>
+       </div>
+       <div *ngIf="showValues == 2">
+            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                <ion-row>
+                    <ion-col  class="textAlignStart" size="6" *ngFor="let item of firstMenue" style="padding:0px">
+                        <ion-card (click)="functioGoToPage(item.url,item.number)">
+                            <ion-card-content class="ionCardContent">
+                                <div class="largDiv">
+                                   <div><img src="{{item.image}}" class="iconImage"></div>
+                                   <div class="divNamePro">{{item.title}}</div>
+                                </div>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+         <div *ngIf="showValuesTow==2 && showLastMenue == 1">
+            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                <ion-row>
+                    <ion-col  class="textAlignStart" size="6" *ngFor="let item of lastMenue" style="padding:0px">
+                        <ion-card (click)="functioGoToPage(item.url,item.number)">
+                            <ion-card-content class="ionCardContent">
+                                <div class="largDiv">
+                                   <div><img src="{{item.image}}" class="iconImage"></div>
+                                   <div class="divNamePro">{{item.title}}</div>
+                                </div>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+        <div *ngIf="showValuesThree == 2">
+            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                <ion-row>
+                    <ion-col  class="textAlignStart" size="6" *ngFor="let item of therdMenue;let i = index" style="padding:0px">
+                        <ion-card (click)="functioGoToPage(item.url,item.number)">
+                            <ion-card-content class="ionCardContent">
+                                <div class="largDiv">
+                                   <div><img src="{{item.image}}" class="iconImage"></div>
+                                   <div class="divNamePro">{{item.title}}</div>
+                                   <div class="note" *ngIf="i==0 && countOfMsseage!=0">{{countOfMsseage}}</div>
+                                </div>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+     </div>
+     <!--department suberviser-->
+    <ion-footer  class="ion-no-border" style="position:fixed;bottom:0px">
+       <ion-toolbar class="footerToolbar">
+        <div class="width100">
+            <div class="menueClass menueClassActive" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/homeSelected.png" style="width:18px"></div>
+            	<div class="labelClass">{{menu5}}</div>
+            </div>
+            <div class="menueClass"  (click)="functionAccount()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/information.png" style="width:18px"></div>
+                <div class="labelClass">{{menu7}}</div>
+            </div>
+            <div class="menueClass" [ngStyle]="{'float': float}" style="height:60px">
+            	<div></div>
+            </div>
+            <!--department suberviser-->
+             <div class="menueClass" *ngIf="departmentId!=1 && type=='suber'"  (click)="functionRequest()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/orders.png" style="width:18px"></div>
+                <div class="labelClass">{{menu6}}</div>
+            </div>
+             <!--department maneger-->
+            <div class="menueClass" *ngIf="type=='man' || type=='itMan'" (click)="functionTeam()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/team.png" style="width:18px"></div>
+                <div class="labelClass">{{menu8}}</div>
+            </div>
+            <!--department maneger-->
+            <div class="menueClass" *ngIf="departmentId==1 && type=='suber'"  (click)="functionNewtasks()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/orders.png" style="width:18px"></div>
+                <div class="labelClass">{{newTasks}}</div>
+            </div>
+            <!--department maneger-->
+             <div class="menueClass" (click)="settings()"  [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/setting.png" style="width:18px"></div>
+                <div class="labelClass">{{menu3}}</div>
+            </div>
+        </div>
+        </ion-toolbar>
+    </ion-footer>
+        <div class="addImageCss" *ngIf="type=='itMan'"><img (click)="functionAllrequest()" src="../../assets/imgs/newRequest.png" class="addImageclass"></div>
+        <div class="addImageCss" *ngIf="type=='man' || (departmentId!=1 && type=='suber')"><img (click)="functionAddrequest()" src="../../assets/imgs/add.png" class="addImageclass"></div>
+        <div class="addImageCss" *ngIf="departmentId==1 && type=='suber'"><img (click)="functionProgressTasks()" src="../../assets/imgs/newRequest.png" class="addImageclass"></div>
+</ion-content>

@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar  class="headerToolbar">
+    <ion-title>
+        <div>
+            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                <ion-row>
+                    <ion-col class="textAlignCenter" size="12" style="padding:0px">
+                    	<div style="font-size:20px;color:#000000">
+                       		{{sendMessageTo}}
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="startWightCurv">
+        <div class="wightCurv"></div>
+    </div>
+     <div class="allPage">
+      <div class="marginTop20">
+            <form style="display: contents;" (ngSubmit)="functionOrderReplyAdd()">
+            <div class="paddingBottom12">
+            	<ion-radio-group (ionChange)="getTheOptions($event)">
+                	 <ion-item lines="none" style="background-color:none; --background:none" *ngIf='departmentRequestId!=1 && getDataByUser==5'>
+                        <ion-label>{{departmentManager}}</ion-label>
+                        <ion-radio slot="start" id="radioPro" mode="md" value="1"></ion-radio>
+                    </ion-item>
+                    <ion-item lines="none" style="background-color:none; --background:none" *ngIf='departmentId!=departmentRequestId && getDataByUser==3'>
+                        <ion-label>{{departmentManager}}</ion-label>
+                        <ion-radio slot="start" id="radioPro" mode="md" value="1"></ion-radio>
+                    </ion-item>
+                     <ion-item lines="none"  style="background-color:none; --background:none"  *ngIf='getDataByUser==2 || getDataByUser==4 || getDataByUser==5'>
+                        <ion-label>{{maintenanceManager}}</ion-label>
+                        <ion-radio slot="start" id="radioPro" mode="md" value="2"></ion-radio>
+                    </ion-item>
+                     <ion-item lines="none"  style="background-color:none; --background:none"  *ngIf='(getDataByUser==2 || getDataByUser==3) && showToAdmin==1'>
+                        <ion-label>{{generalManager}}</ion-label>
+                        <ion-radio slot="start" id="radioPro" mode="md" value="4"></ion-radio>
+                    </ion-item>
+                     <ion-item lines="none"  style="background-color:none; --background:none"  *ngIf='(lastStatusVal==2 || lastStatusVal==5)&& taskUsers!=0 && getDataByUser==3'>
+                        <ion-label>{{maintenanceSupervisors}}</ion-label>
+                        <ion-radio slot="start" id="radioPro" mode="md" value="3">{{maintenanceSupervisors}}</ion-radio>
+                    </ion-item>
+              </ion-radio-group>
+            </div>
+            <div class="paddingBottom12" *ngIf='showSelect==1 && taskUsers!=0'>
+             <ion-item [ngStyle]="{'direction': dir}" lines="none">
+                <ion-select mode="ios" placeholder="{{supervisor}}" (ionChange) = "selectUserTaskName($event.target.value)" [ngStyle]="{'direction': dir}" cancelText="{{settingsNo}}" okText="{{settingsYas}}">
+                   <ion-select-option value="all">{{all}}</ion-select-option>
+                   <ion-select-option *ngFor="let items of returnAssignedArray" value="{{items.id}}">{{items.name}}</ion-select-option>
+                </ion-select>
+              </ion-item>	
+            </div>
+           <div class="paddingBottom12">
+                <ion-item [ngStyle]="{'direction': dir}" lines="none" class="{{errorReply}}">
+                    <ion-textarea rows="5" [(ngModel)]="replyMsg" [ngModelOptions]="{standalone: true}" placeholder="{{replyPlaceholder}}" (ionInput)="checkReply($event.target.value)"></ion-textarea>
+                </ion-item>
+                <div class="errorTitle" *ngIf="isErrorReply == 0">{{isErrorReplyMsg}}</div>
+            </div>
+             <div>
+                 <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                    <ion-row>
+                         <ion-col class="textAlignCenter">
+                            <div class="divButtonClass">
+                                <ion-button class="oneButton fontSize14" (click)="functionOrderReplyAdd()" id="submit">{{add}}</ion-button>
+                              </div>
+                        </ion-col>
+                        
+                        <ion-col class="textAlignCenter">
+                            <div class="divButtonClass">
+                                <ion-button class="oneButton fontSize14" (click)="closeModel()" id="submit">{{cancel}}</ion-button>
+                              </div>
+                        </ion-col> 
+                    </ion-row>
+                </ion-grid>
+            </div>
+            <button style="visibility:hidden" id="submit" ion-button type="submit" ></button>
+            </form>
+        </div>
+     </div>
+</ion-content>

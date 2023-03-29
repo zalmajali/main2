@@ -1,0 +1,5 @@
+.zeyad{height:100vh; background-size: 105% 105%; background-repeat: no-repeat; background-position:center; background-image:url(https://msbtrucks.com/maintenanceRequests2/images/background.jpg); animation:shrink 5s infinite alternate}
+@keyframes shrink {
+  0% 	{background-size: 105% 105%}
+  100% 	{background-size: 100% 100%}
+}

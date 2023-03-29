@@ -1,0 +1,135 @@
+/*start Header style*/
+.headerToolbar{
+--background: var(--ion-color-wight) !important;
+--border-width:0px !important;
+--padding-top:22px;
+--padding-bottom:0px;
+--padding-start:0px;
+--padding-end:0px;
+}
+ion-content{
+	--background: #F2FBFF;
+    background-size: cover;
+	background-position:center;
+}
+.header-md::after{
+	background-image:none;
+}
+ion-title{
+	padding-inline:5px !important;
+}
+.ios ion-title {
+   position: inherit;
+   width:100%;
+   padding-top: 0px;
+}
+.PNIcon{
+	font-size:35px;
+	color:#0F75BD
+}
+.classValData{
+    --background: #FFA500;
+    color: var(--ion-color-wight);
+    position: fixed;
+    top: 0px;
+    --padding-top: 4px;
+    --padding-end: 4px;
+    --padding-bottom: 4px;
+    --padding-start: 4px;
+    font-size: 9px;
+	font-weight:100;
+	z-index:100;
+}
+.showPas{
+	color: #0f75bd
+}
+/*end Header style*/
+/*start content style*/
+.allPage{
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-left: 15px;
+	height: 100%;
+}
+.startWightCurv{
+	width: 100%;
+    text-align: center;
+    margin: 0px auto;
+    position: fixed;
+}
+.wightCurv{
+	width: 300px;
+    position: relative;
+    bottom: 40px;
+    border-radius: 100%;
+    background-color: var(--ion-color-wight);
+    height: 50px;
+    display: inline-table;
+}
+.addImageCss{
+	position: fixed;
+    text-align: center;
+    z-index: 100000000;
+    bottom: 45px;
+    height: 50px;
+    width: 100%;
+}
+.addImageclass{
+	width: 70px;
+    padding: 7px;
+    background: #F2FBFF;
+    border-radius: 100%;
+}
+ion-item{
+   --min-height:44px;
+   --background: var(--ion-color-wight);
+   --ion-background-color: var(--ion-color-wight);
+   --inner-padding-start:0px;
+   --padding-bottom:0px;
+   border-radius:9px;
+}
+.errorFiled{
+	 border:1px solid red;
+}
+.succsessFiled{
+	 border:1px solid green;
+}
+.errorTitle{
+    color: red;
+    font-size: 12px;
+    padding-top: 2px;	
+}
+.ionTitle {
+  color: var(--ion-color-formPlaseHolderColor);
+  font-size: 13px;
+  font-weight:100;
+  text-align: start;
+  padding-top:7px !important;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+.allPage{
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-left: 15px;
+	 height: 100%;
+}
+.ordersInformation{
+color:#000000;
+	font-size:13px;
+	padding-top:5px
+}
+.divEmptyVal{
+    text-align: center;
+    margin-top: 200px;
+}
+.emptyFirstText{
+    font-size: 20px;
+    color:#0f75bd;
+    padding-bottom: 5px;
+}
+.emptyLastText{
+    font-size: 15px;
+     color:#0f75bd;
+}
+/*start content style*/

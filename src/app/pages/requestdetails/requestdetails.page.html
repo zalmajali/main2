@@ -1,0 +1,154 @@
+<ion-header>
+  <ion-toolbar  class="headerToolbar">
+    <ion-title>
+        <div>
+            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                <ion-row>
+                    <ion-col class="textAlignStart" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                            <ion-icon name="{{arrowBack}}" slot="icon-only" class="PNIcon"  (click)="functionBack()"></ion-icon>
+                        </div>
+                    </ion-col>
+                     <ion-col class="textAlignCenter" size="8">
+                    	<div style="font-size:18px;color:#000000">
+                       	{{orderDetails}}: #{{requestId}}
+                        </div>
+                    </ion-col>
+                    <ion-col class="textAlignEnd" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                        <ion-badge *ngIf="newNotifications!=0" class="classValData" slot="start" mode='ios'>{{newNotifications}}</ion-badge>
+                        <ion-icon name="notifications" slot="icon-only" class="PNIcon"  (click)="functionPushNotifications()"></ion-icon>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="startWightCurv">
+        <div class="wightCurv"></div>
+    </div>
+     <div class="allPage">
+        <div style="padding-top:10px">
+            <div>
+                <div class="ordersInformation" *ngIf="employeetypeVal == 1 && exisetUserVal == 1">{{addedBy}}: {{supervisor}} {{fullNameAddByVal}}</div>
+                <div class="ordersInformation" *ngIf="employeetypeVal == 2 && exisetUserVal == 1">{{addedBy}}: {{manager}} {{fullNameAddByVal}}</div>
+                <div class="ordersInformation" *ngIf="employeetypeVal == 1 && exisetUserVal == 0">{{addedBy}}: {{previousEmployee}} {{fullNameAddByVal}}</div>
+              	<div class="ordersInformation" style="color:green; font-weight:bold; font-size:14px">{{insertTime}}: {{insertTimeVal}}</div>  
+              	<div class="ordersInformation">{{departmentName}}: {{departmentNameVal}}</div>
+                <div class="ordersInformation">{{urgency}}: {{urgencyVal}}</div>
+                <div class="ordersInformation" *ngIf="getDataByUser!= 5">{{machineNumber}}: {{machineNumberVal}}</div>
+                <div class="ordersInformation" *ngIf="getDataByUser!= 5">{{machineDescription}}: {{machineDescriptionVal}}</div>
+                <div class="ordersInformation" *ngIf="getDataByUser!= 5">{{machineStatus}}: {{machineWorkingStatus}}</div>
+                <div class="ordersInformation">{{faultDescription}}: <div style="height:100%;max-height:100px; overflow:auto">{{faultDescriptionVal}}</div></div>
+                
+                <div >
+                    <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px" *ngFor="let item of filseVal">
+                        <ion-row (click)="functionShowFile(item.link,item.name,item.fileName)">
+                            <ion-col class="textAlignStart" style="padding:0px">
+                                <div class="filesClass">
+                                	 <img src="../../assets/imgs/files.png" style="width:20px"> {{item.name}}
+                                </div>
+                            </ion-col>
+                        </ion-row>
+                	</ion-grid>
+                </div>
+                <div class="ordersInformation" *ngIf="lastStatusVal == 3 && findingsVal!=''">{{findings}}: <div style="height:100%;max-height:100px; overflow:auto">{{findingsVal}}</div></div>
+                <div class="ordersInformation" *ngIf="lastStatusVal == 3 && correctionsVal!=''">{{corrections}}: <div style="height:100%;max-height:100px; overflow:auto">{{correctionsVal}}</div></div>
+                <div class="ordersInformation" *ngIf="lastStatusVal == 3 && replacedPartsVal!=''">{{replacedParts}}:<div style="height:100%;max-height:100px; overflow:auto">{{replacedPartsVal}}</div></div>
+                <div class="ordersInformation" *ngIf="lastStatusVal == 3 && notesVal!=''">{{notes}}: <div style="height:100%;max-height:100px; overflow:auto">{{notesVal}}</div></div>
+                <div style="width:100%;border-top:2px solid #ccc; margin-top:5px"></div>
+                <!--forLope--->
+                <div *ngIf="lastStatusVal == 3">
+                	<ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px" *ngFor="let item of assignedVal">
+                        <ion-row>
+                            <ion-col class="textAlignStart" size="6" style="padding:0px">
+                                <div class="ordersInformation">
+                                	 {{startDate}}: <span style="color:#bc0101">{{item.startDate}}</span>
+                                </div>
+                            </ion-col>
+                            <ion-col class="textAlignStart" size="6" style="padding:0px">
+                                <div class="ordersInformation">
+                                	 {{endDate}}: <span style="color:#bc0101">{{item.endDate}}</span>
+                                </div>
+                            </ion-col>
+                            <ion-col  class="textAlignStart" size="6" style="padding:0px">
+                                <div class="ordersInformation">
+                                	 {{totalWorkingHours}}: <span style="color:#bc0101">{{item.totalJobHours}}</span>
+                                </div>
+                            </ion-col>
+                            <ion-col  class="textAlignStart" size="6" style="padding:0px">
+                                <div class="ordersInformation">
+                                	 {{technicianName}}: <span style="color:#bc0101">{{item.technicianName}}</span>
+                                </div>
+                            </ion-col>
+                            <ion-col class="textAlignStart" size="6" style="padding:0px">
+                                <div class="ordersInformation">
+                                	 {{supervisor}}: <span style="color:#bc0101">{{item.employeeName}}</span>
+                                </div>
+                            </ion-col>
+                        </ion-row>
+                	</ion-grid>
+                </div>
+                <div class="ordersInformation" *ngIf="lastStatusVal == 3">{{closedTime}}: {{closedTimeVal}}</div>
+				<div *ngIf="lastStatusVal == 3" style="width:100%;border-top:2px solid #ccc; margin-top:5px"></div>
+                <div class="ordersInformation" *ngIf="lastStatusVal == 4 && cancelledReasonVal!=0">{{cancelledReason}}: <div style="height:100%;max-height:100px; overflow:auto">{{cancelledReasonVal}}</div></div>
+                <div class="ordersInformation" *ngIf="employeetypeApproVal == 2 && exisetUserApproVal == 1">{{approvedBy}}: {{manager}} {{fullNameAddApproVal}} {{approveTimeVal}}</div>
+                <div class="ordersInformation" *ngIf="employeetypeApproVal == 2 && exisetUserApproVal == 0">{{approvedBy}}: {{previousEmployee}} {{fullNameAddApproVal}} {{approveTimeVal}}</div>
+                <div class="ordersInformation" *ngIf="employeetypeStatusVal == 2 && exisetUserStatusVal == 1 && lastStatusVal == 2">{{inProgressBy}}: {{manager}} {{fullNameAddStatusVal}} {{lastStatusTimeVal}}</div>
+                <div class="ordersInformation" *ngIf="employeetypeStatusVal == 2 && exisetUserStatusVal == 0 && lastStatusVal == 2">{{inProgressBy}}: {{previousEmployee}} {{fullNameAddStatusVal}} {{lastStatusTimeVal}}</div>
+                <div class="ordersInformation" *ngIf="employeetypeStatusVal == 2 && exisetUserStatusVal == 1 && lastStatusVal == 3">{{resolvedBy}}: {{manager}} {{fullNameAddStatusVal}} {{lastStatusTimeVal}}</div>
+                <div class="ordersInformation" *ngIf="employeetypeStatusVal == 2 && exisetUserStatusVal == 0 && lastStatusVal == 3">{{resolvedBy}}: {{previousEmployee}} {{fullNameAddStatusVal}} {{lastStatusTimeVal}}</div>
+                <div class="ordersInformation" *ngIf="employeetypeStatusVal == 2 && exisetUserStatusVal == 1 && lastStatusVal == 4">{{canceledBy}}: {{manager}} {{fullNameAddStatusVal}} {{lastStatusTimeVal}}</div>
+                <div class="ordersInformation" *ngIf="employeetypeStatusVal == 2 && exisetUserStatusVal == 0 && lastStatusVal == 4">{{canceledBy}}: {{previousEmployee}} {{fullNameAddStatusVal}} {{lastStatusTimeVal}}</div>
+                <div class="ordersInformation" *ngIf="employeetypeStatusVal == 2 && exisetUserStatusVal == 1 && lastStatusVal == 5">{{reopenedBy}}: {{manager}} {{fullNameAddStatusVal}} {{lastStatusTimeVal}}</div>
+                <div class="ordersInformation" *ngIf="employeetypeStatusVal == 2 && exisetUserStatusVal == 0 && lastStatusVal == 5">{{reopenedBy}}: {{previousEmployee}}  {{fullNameAddStatusVal}} {{lastStatusTimeVal}}</div>
+                <div style="font-size:16px; color:#0f75bd; padding-top:10px" (click)="functionPrint(requestId)"><img src="../../assets/imgs/print.png" style="width:30px"></div>
+                
+            </div>
+        </div>
+     </div>
+     <!--department suberviser-->
+    <ion-footer  class="ion-no-border" style="position:fixed;bottom:0px">
+       <ion-toolbar class="footerToolbar">
+        <div class="width100">
+            <div class="menueClass" (click)="functionHome()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/home.png" style="width:18px"></div>
+            	<div class="labelClass">{{menu5}}</div>
+            </div>
+            <div class="menueClass" (click)="functionAccount()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/information.png" style="width:18px"></div>
+                <div class="labelClass">{{menu7}}</div>
+            </div>
+            <div class="menueClass" [ngStyle]="{'float': float}" style="height:60px">
+            	<div></div>
+            </div>
+            <!--department suberviser-->
+             <div class="menueClass" *ngIf="departmentId!=1 && type=='suber'"  (click)="functionRequest()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/orders.png" style="width:18px"></div>
+                <div class="labelClass">{{menu6}}</div>
+            </div>
+             <!--department maneger-->
+            <div class="menueClass" *ngIf="type=='man' || type=='itMan'" (click)="functionTeam()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/team.png" style="width:18px"></div>
+                <div class="labelClass">{{menu8}}</div>
+            </div>
+            <!--department maneger-->
+            <div class="menueClass" *ngIf="departmentId==1 && type=='suber'"  (click)="functionNewtasks()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/orders.png" style="width:18px"></div>
+                <div class="labelClass">{{newTasks}}</div>
+            </div>
+            <!--department maneger-->
+             <div class="menueClass" (click)="settings()"  [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/setting.png" style="width:18px"></div>
+                <div class="labelClass">{{menu3}}</div>
+            </div>
+        </div>
+        </ion-toolbar>
+    </ion-footer>
+        <div class="addImageCss" *ngIf="type=='itMan'"><img (click)="functionAllrequest()" src="../../assets/imgs/newRequest.png" class="addImageclass"></div>
+        <div class="addImageCss" *ngIf="type=='man' || (departmentId!=1 && type=='suber')"><img (click)="functionAddrequest()" src="../../assets/imgs/add.png" class="addImageclass"></div>
+        <div class="addImageCss" *ngIf="departmentId==1 && type=='suber'"><img (click)="functionProgressTasks()" src="../../assets/imgs/newRequest.png" class="addImageclass"></div>
+</ion-content>

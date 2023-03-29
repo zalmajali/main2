@@ -1,0 +1,73 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="headerToolbar">
+    <ion-title>
+        <div class="palanceText"> رصيد الخدمات </div>
+        <div class="palancePoints">{{points}}</div>
+        <div class="point">نقطة<br>مقايضة</div>
+    </ion-title>
+    <ion-buttons slot="start">
+       <div (click)="functionOpenMenue()"><img src="../../assets/imgs/Group871.png" style="width:28px"></div>
+       <div (click)="functionPushNotifications()" style="padding-right:20px"><img src="../../assets/imgs/alert.png" style="width:17px"></div>
+       <ion-badge *ngIf="newNotifications!=0" class="classValData" slot="start" mode='ios'>{{newNotifications}}</ion-badge>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+     <div *ngIf="dataArch!=0">
+        <div style="width:100%" *ngFor="let items of returnPointsArray;let i = index">
+             <div class="storesBox">
+                <div class="storesSubBox">
+                    <div class="storesImageDiv">
+                         <img src="../../assets/imgs/dot.png" style="width:20px;padding-top: 40px;">
+                    </div>
+                    <div>
+                        <div>
+                            <div class="operationDisc">تم {{items.type}} <span style="font-family:auto; font-weight:bold">{{items.points}}</span> نقطة {{items.to}} {{items.toUser}} {{items.msgFromAdmin}}</div>
+                            <div class="operationDate">{{items.date}}</div>
+                            <div class="operationNum">رقم الصفقة <span style="font-family:auto; font-weight:bold">{{items.id}}</span></div>
+                            <div class="operationNum">رقم الهاتف <span style="font-family:auto; font-weight:bold">{{items.toMobile}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="divEmptyVal" *ngIf="dataArch==0">
+        <div>
+            <img src="../../assets/imgs/noData.png" style="width:150px; height:150px">
+        </div>
+        <div class="emptyFirstText">
+           لا يوجد بيانات 
+        </div>
+        <div class="emptyLastText">
+            نعتذر لا يوجد بيانات في ارشيف النقاط
+        </div>
+    </div>
+</ion-content>
+   <div class="menueValues"><img (click)="functionGoToSendPoint()" src="../../assets/imgs/sendPoint.png" style="width:70px"></div>
+        <ion-footer class="ion-no-border">
+        <ion-toolbar class="footerToolbar">
+            <div class="width100">
+                <div class="menueClass" (click)="functionGoToHome()">
+                    <div><img src="../../assets/imgs/Group862.png" style="width:20px"></div>
+                    <div class="labelClass">الرئيسية</div>
+                </div>
+                <div class="menueClass" (click)="functionGoInvitations()">
+                    <div><img src="../../assets/imgs/Group863.png" style="width:18px"></div>
+                    <div class="labelClass">الدعوات</div>
+                </div>
+                <div class="menueClass" (click)="functionGoToSendPoint()">
+                    <div style="height:28px"></div>
+                    <div class="labelClass" style="font-size:15px">إرسال نقاط</div>
+                </div>
+                <div class="menueClass">
+                    <div><img src="../../assets/imgs/GroupSelect865.png" style="width:18px"></div>
+                    <div class="labelClass">السجل</div>
+                </div>
+                <div class="menueClass" (click)="functionOpenAccount()">
+                    <div><img src="../../assets/imgs/Group866.png" style="width:18px"></div>
+                    <div class="labelClass">حسابي</div>
+                </div>
+            </div>
+        </ion-toolbar>
+        </ion-footer>

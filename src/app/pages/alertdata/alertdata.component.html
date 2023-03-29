@@ -1,0 +1,75 @@
+<ion-content>
+   <div class="largBox">
+   	<div class="smallBox">
+    	<div *ngIf="opera==1">
+            <div style="padding-top:10px"><img src="../../assets/imgs/redCheck.png" style="width:32px"></div>
+            <div class="title">رقم الهاتف غير موجود</div>
+            <div class="smallTitle">رقم الهاتف الذي تحاول تحويل النقاط اليه غير مسجل على التطبيق</div>
+            <div class="smallTitle">قم بدعوة مقدم هذه الخدمة لإستخدام تطبيق سواب و أحصل على نقاط إضافية</div>
+            <div class="largeDiv">
+                 <ion-grid style="padding:0px">
+                    <ion-row>
+                        <ion-col class="textAlignStart" size="6" style="padding:0px" (click)="closeModel()">
+                            <div style="padding-top:15px;padding-left:20px; font-size:16px;color:#ED2224">
+                                خروج
+                            </div>
+                        </ion-col>
+                        <ion-col class="textAlignEnd" size="6" style="padding:0px">
+                            <div>
+                                 <div class="divButtonClass">
+                                    <ion-button class="oneButton fontSize18" (click)="functionGoInvitations()" id="submit"><span style="font-size:12px;padding-top:4px">إرسال دعوة</span></ion-button>
+                                  </div>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+        </div>
+        <div *ngIf="opera==2">
+            <div style="padding-top:10px"><img src="../../assets/imgs/redCheck.png" style="width:32px"></div>
+            <div class="titleTow">...نعتذر</div>
+            <div class="smallTitleTow">لا يوجد لديك رصيد نقاط كافي لإتمام التحويل</div>
+            <div class="titleThre">يمكنك الحصول على نقاط من خلال</div>
+            <div class="smallTitleThree"><img src="../../assets/imgs/check.png" style="width:15px">تقديم خدمة و الحصول على نقاط</div>
+            <div class="smallTitleThree"><img src="../../assets/imgs/check.png" style="width:15px"> دعوة مقدمي الخدمات لإستخدام تطبيق سواب</div>
+            <div class="largeDiv">
+                 <ion-grid style="padding:0px">
+                    <ion-row>
+                        <ion-col class="textAlignStart" size="6" style="padding:0px" (click)="closeModel()">
+                            <div style="padding-top:15px;padding-left:20px; font-size:16px;color:#ED2224">
+                                خروج
+                            </div>
+                        </ion-col>
+                        <ion-col class="textAlignEnd" size="6" style="padding:0px">
+                            <div>
+                                 <div class="divButtonClass">
+                                    <ion-button class="oneButtonTow fontSize18" (click)="functionGoInvitations()" id="submit"><span style="font-size:12px;padding-top:4px">دعوة صديق لتقديم خدمة</span></ion-button>
+                                  </div>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+        </div>
+        <div *ngIf="opera==3">
+            <div style="padding-top:10px"><img src="../../assets/imgs/redCheck.png" style="width:32px"></div>
+            <div class="titleTow">...نعتذر</div>
+            <div class="smallTitleTow">لا يمكنك التحويل لنفس رقم صاحب الحساب</div>
+            <div class="titleThre">يمكنك الحصول على نقاط من خلال</div>
+            <div class="smallTitleThree"><img src="../../assets/imgs/check.png" style="width:15px">تقديم خدمة و الحصول على نقاط</div>
+            <div class="smallTitleThree"><img src="../../assets/imgs/check.png" style="width:15px"> دعوة مقدمي الخدمات لإستخدام تطبيق سواب</div>
+             <div class="largeDivTow">
+                 <ion-grid style="padding:0px">
+                    <ion-row>
+                        <ion-col class="textAlignStart" size="6" style="padding:0px" (click)="closeModel()">
+                            <div style="padding-bottom: 11px;padding-left: 20px;font-size: 16px;color: #ED2224;padding-top: 11px;">
+                                خروج
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+        </div>
+    </div>
+   </div> 
+</ion-content>

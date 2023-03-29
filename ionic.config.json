@@ -1,0 +1,7 @@
+{
+  "name": "JALCO CMO",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,117 @@
+<ion-header>
+  <ion-toolbar  class="headerToolbar">
+    <ion-title>
+         <div>
+            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                <ion-row>
+                    <ion-col class="textAlignStart" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                            <ion-icon name="{{arrowBack}}" slot="icon-only" class="PNIcon"  (click)="functionBackPage()"></ion-icon>
+                        </div>
+                    </ion-col>
+                     <ion-col class="textAlignCenter" size="8">
+                    	<div style="font-size:18px;color:#000000">
+                       {{requestsAddTitle}}
+                        </div>
+                    </ion-col>
+                    <ion-col class="textAlignEnd" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                        <ion-badge *ngIf="newNotifications!=0" class="classValData" slot="start" mode='ios'>{{newNotifications}}</ion-badge>
+                        <ion-icon name="notifications" slot="icon-only" class="PNIcon"  (click)="functionPushNotifications()"></ion-icon>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="startWightCurv">
+        <div class="wightCurv"></div>
+    </div>
+     <div class="allPage">
+      <div class="marginTop20">
+            <form style="display: contents;" (ngSubmit)="editRequests()">
+            <div class="paddingBottom12">
+                <ion-item [ngStyle]="{'direction': dir}" lines="none" class="{{errorMachineNumber}}">
+                    <ion-input type="text" [(ngModel)]="machineNumberVal" [ngModelOptions]="{standalone: true}" placeholder="{{machineNumber}}" (ionInput)="checkMachineNumber($event.target.value)"></ion-input>
+                </ion-item>
+                <div class="errorTitle" *ngIf="isErrorMachineNumber == 0">{{isErrorMachineNumberMsg}}</div>
+            </div>
+              <div class="paddingBottom12">
+                <ion-toolbar [ngStyle]="{'direction': dir}" mode='ios' style="border-radius:9px">
+                    <ion-title class="ionTitle">{{urgency}}</ion-title>
+                    <ion-segment [ngStyle]="{'direction': dir}" value="{{urgencyVal}}">
+                    <ion-segment-button value="1" (click)="changeUrgency(1)">{{low}}</ion-segment-button>
+                    <ion-segment-button value="2" (click)="changeUrgency(2)">{{medium}}</ion-segment-button>
+                    <ion-segment-button value="3" (click)="changeUrgency(3)">{{hight}}</ion-segment-button>
+                    </ion-segment>
+                </ion-toolbar>
+            </div>
+            <div class="paddingBottom12">
+                <ion-item [ngStyle]="{'direction': dir}" lines="none" class="{{errorMachineDescription}}">
+                    <ion-input type="text" [(ngModel)]="machineDescriptionVal" [ngModelOptions]="{standalone: true}" placeholder="{{machineDescription}}" (ionInput)="checkMachineDescription($event.target.value)"></ion-input>
+                </ion-item>
+                <div class="errorTitle" *ngIf="isErrorMachineDescription == 0">{{isErrorMachineDescriptionMsg}}</div>
+            </div>
+             <div class="paddingBottom12">
+                <ion-toolbar [ngStyle]="{'direction': dir}" mode='ios' style="border-radius:9px">
+                    <ion-title class="ionTitle">{{machineStatus}}</ion-title>
+                    <ion-segment [ngStyle]="{'direction': dir}" value="{{machineStatusVal}}">
+                    <ion-segment-button value="1" (click)="changeStatus(1)">{{working}}</ion-segment-button>
+                    <ion-segment-button value="2" (click)="changeStatus(2)">{{notWorking}}</ion-segment-button>
+                    </ion-segment>
+                </ion-toolbar>
+            </div>
+            <div class="paddingBottom12">
+                <ion-item [ngStyle]="{'direction': dir}" lines="none" class="{{errorFaultDescription}}">
+                    <ion-textarea rows="5" [(ngModel)]="faultDescriptionVal" [ngModelOptions]="{standalone: true}" placeholder="{{faultDescription}}" (ionInput)="checkFaultDescription($event.target.value)"></ion-textarea>
+                </ion-item>
+                <div class="errorTitle" *ngIf="isErrorFaultDescription == 0">{{isErrorFaultDescriptionMsg}}</div>
+            </div>
+            <div class="paddingBottom12">
+				<ion-item lines="none">
+                    <ion-label>{{showGeneral}}</ion-label>
+                    <ion-checkbox slot="start" value="1" mode="ios" checked='{{isallowShowGeneral}}' (ionChange)="checkedValues($event)"></ion-checkbox>
+                </ion-item>
+            </div>
+             <div>
+              <div class="divButtonClass">
+                <ion-button class="oneButton fontSize14" (click)="editRequests()" disabled="{{!isdisabled}}" id="submit">{{add}}</ion-button>
+              </div>
+            </div>
+            <button style="visibility:hidden" id="submit" ion-button type="submit" ></button>
+            </form>
+        </div>
+     </div>
+     <!--department suberviser-->
+    <ion-footer  class="ion-no-border" style="position:fixed;bottom:0px">
+       <ion-toolbar class="footerToolbar">
+       <div class="width100">
+            <div class="menueClass" (click)="functionHome()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/home.png" style="width:18px"></div>
+            	<div class="labelClass">{{menu5}}</div>
+            </div>
+            <div class="menueClass" (click)="functionAccount()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/information.png" style="width:18px"></div>
+                <div class="labelClass">{{menu7}}</div>
+            </div>
+            <div class="menueClass" [ngStyle]="{'float': float}" style="height:60px">
+            	<div></div>
+            </div>
+             <!--department maneger-->
+            <div class="menueClass" (click)="functionTeam()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/team.png" style="width:18px"></div>
+                <div class="labelClass">{{menu8}}</div>
+            </div>
+            <!--department maneger-->
+             <div class="menueClass" (click)="settings()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/setting.png" style="width:18px"></div>
+                <div class="labelClass">{{menu3}}</div>
+            </div>
+        </div>
+        </ion-toolbar>
+    </ion-footer>
+        <div class="addImageCss" (click)="functionAddrequest()"><img src="../../assets/imgs/add.png" class="addImageclass"></div>
+</ion-content>

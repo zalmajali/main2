@@ -1,0 +1,125 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="headerToolbar">
+    <ion-title>
+        <div class="palanceText"> رصيد الخدمات </div>
+        <div class="palancePoints">{{points}}</div>
+        <div class="point">نقطة<br>مقايضة</div>
+    </ion-title>
+    <ion-buttons slot="start">
+       <div (click)="functionOpenMenue()"><img src="../../assets/imgs/Group871.png" style="width:28px"></div>
+       <div (click)="functionPushNotifications()" style="padding-right:20px"><img src="../../assets/imgs/alert.png" style="width:17px"></div>
+       <ion-badge *ngIf="newNotifications!=0" class="classValData" slot="start" mode='ios'>{{newNotifications}}</ion-badge>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div style="padding:20px">
+       	<div style="padding-bottom:15px; font-size:23px;color:#000000">إرسال نقاط</div>
+    
+       <div *ngIf="checkIfSendPointsNew==2" style="padding-top:8px">
+            <div style="font-size:23px;text-align:center"><img src="../../assets/imgs/redCheck.png" style="width:25px"></div>
+            <div style="padding-bottom:15px; font-size:18px;color:#ff0000; text-align:center">لم تتم عملية ارسال النقاط بنجاح</div>
+       </div>
+        <div  *ngIf="checkIfSendPointsNew==1"  style="padding-top:8px">
+            <div style="font-size:23px;text-align:center"><img src="../../assets/imgs/greenCheck.png" style="width:25px"></div>
+            <div style="padding-bottom:15px; font-size:18px;color:#24b14b; text-align:center">تمت العملية بنجاح</div>
+       </div>
+       <div style="padding-bottom:15px; padding-top:10px">
+           <form style="display: contents;" (ngSubmit)="sendPointsToUser()">
+            <div class="paddingBottom">
+                <ion-item lines="none" class="{{errorNumber}}">
+                 	<span class="titleInInput">
+                       رقم الجوال
+                    </span>
+                    <ion-input type="number" placeholder="رقم الجوال مثال 96212345678" [(ngModel)]="number" [ngModelOptions]="{standalone: true}" (ionInput)="checkNumber($event.target.value)"></ion-input>
+                </ion-item>
+                    <div class="errorTitle" *ngIf="isErrorUserNumber == 0">الرجاء إدخال رقم الجوال</div>
+            </div>
+            <div class="paddingBottom">
+                <ion-item lines="none" class="{{errorPoints}}">
+                 	<span class="titleInInput">
+                       عدد النقاط
+                    </span>
+                    <ion-input type="number" [(ngModel)]="pointsUser" [ngModelOptions]="{standalone: true}" (ionInput)="checkPoint($event.target.value)"></ion-input>
+                </ion-item>
+                    <div class="errorTitle" *ngIf="isErrorUserPoints == 0">الرجاء إدخال عدد النقاط المراد تحويلها</div>
+            </div>
+            <div *ngIf="checkIfSendPoints==1" class="findUser">
+                تم العثور على مقدم خدمة
+            </div>            
+             <div class="paddingBottom" *ngIf="checkIfSendPoints==1" style="margin-top:10px">
+                <ion-item lines="none">
+					<div style="margin: 11px 11px 10px 11px;"><img src="{{personalImage}}" style="width: 50px;border-radius: 100%;height: 50px;"></div>
+                    <div style="height:50px">
+                    	<div style="font-size:12px; color:#000000">مقدم الخدمة</div>
+                        <div style="font-size:18px; color:#000000">{{commercialName}}</div>
+                        <div>
+                        	<div class="starLabel">
+                              <div class="star">
+                                  <div class="starBackRat" [ngStyle]="{'width': rate}">
+                                     <div class="starcover">
+                                      <img src="../../assets/imgs/starImage.png" style="width:15px; height:15px;max-width:15px"/>
+                                      <img src="../../assets/imgs/starImage.png" style="width:15px; height:15px;max-width:15px"/>
+                                      <img src="../../assets/imgs/starImage.png" style="width:15px; height:15px;max-width:15px"/>
+                                      <img src="../../assets/imgs/starImage.png" style="width:15px; height:15px;max-width:15px"/>
+                                      <img src="../../assets/imgs/starImage.png" style="width:15px; height:15px;max-width:15px"/>
+                                     </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%;text-align: end;position: absolute;padding-left: 17px;">
+						<div class="divButtonClass">
+                        <ion-button class="oneButtonThree fontSize18" (click)="functionDeleteSearch()" id="submit"><span style="font-size:16px;padding-top:4px">إلغاء</span></ion-button>
+                      </div>                    
+                    </div>
+                </ion-item>
+            </div>
+            <div *ngIf="checkIfSendPoints!=1">
+              <div class="divButtonClass">
+                <ion-button class="oneButton fontSize18" (click)="functionCheckNumberaAndPoint()" id="submit"><span style="font-size:16px;padding-top:4px">البحث عن رقم</span></ion-button>
+              </div>
+            </div>
+            <div *ngIf="checkIfSendPoints==1 && checkIfSendPointsThree==0">
+              <div class="divButtonClass">
+                <ion-button class="oneButton fontSize18" (click)="sendPointsToUser()" id="submit" disabled="{{!isdisabled}}"><span style="font-size:16px;padding-top:4px">أرسل الان</span></ion-button>
+              </div>
+            </div>
+            <div *ngIf="checkIfSendPointsThree==1">
+              <div class="divButtonClass">
+                <ion-button class="oneButton fontSize18" (click)="sendPointsToUser()" id="submit" disabled="{{!isdisabled}}"><span style="font-size:12px;padding-top:4px">قدم خدمات اكثر للحصول على نقاط إضافية</span></ion-button>
+              </div>
+            </div>
+            <button style="visibility:hidden" id="submit" ion-button type="submit" ></button>
+            </form>
+       </div>
+    </div> 
+</ion-content>
+  <div class="menueValues"><img (click)="functionGoToSendPoint()" src="../../assets/imgs/sendPoint.png" style="width:70px"></div>
+        <ion-footer class="ion-no-border">
+        <ion-toolbar class="footerToolbar">
+            <div class="width100">
+                <div class="menueClass"  (click)="functionGoToHome()">
+                    <div><img src="../../assets/imgs/Group862.png" style="width:20px"></div>
+                    <div class="labelClass">الرئيسية</div>
+                </div>
+                <div class="menueClass" (click)="functionGoInvitations()">
+                    <div><img src="../../assets/imgs/Group863.png" style="width:18px"></div>
+                    <div class="labelClass">الدعوات</div>
+                </div>
+                <div class="menueClass">
+                    <div style="height:28px"></div>
+                    <div class="labelClass" style="font-size:15px">إرسال نقاط</div>
+                </div>
+                <div class="menueClass" (click)="functionGoToArchives()">
+                    <div><img src="../../assets/imgs/Group865.png" style="width:18px"></div>
+                    <div class="labelClass">السجل</div>
+                </div>
+                <div class="menueClass" (click)="functionOpenAccount()">
+                    <div><img src="../../assets/imgs/Group866.png" style="width:18px"></div>
+                    <div class="labelClass">حسابي</div>
+                </div>
+            </div>
+        </ion-toolbar>
+        </ion-footer>

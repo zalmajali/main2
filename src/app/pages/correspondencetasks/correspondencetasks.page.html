@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar  class="headerToolbar">
+    <ion-title>
+        <div>
+            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                <ion-row>
+                    <ion-col class="textAlignStart" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                            <ion-icon name="{{arrowBack}}" slot="icon-only" class="PNIcon"  (click)="functionBack()"></ion-icon>
+                        </div>
+                    </ion-col>
+                     <ion-col class="textAlignCenter" size="8">
+                        <div class="titleUser">
+                       	{{correspondencesDetails}}: #{{requestId}}
+                        </div>
+                    </ion-col>
+                    <ion-col class="textAlignEnd" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                        <ion-badge *ngIf="newNotifications!=0" class="classValData" slot="start" mode='ios'>{{newNotifications}}</ion-badge>
+                        <ion-icon name="notifications" slot="icon-only" class="PNIcon"  (click)="functionPushNotifications()"></ion-icon>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="startWightCurv">
+        <div class="wightCurv"></div>
+    </div>
+     <div class="allPage">
+           <div class="sortingFilterLargDiv" [ngStyle]="{'direction': dirTow}">
+                <div class="sortingFilterSecoundDiv">
+                    <div class="sortingFilterDiv" (click)="functionAddReply()"><img src="../../assets/imgs/sendReply.png" style="width:24px"></div>
+                </div>
+            </div>
+            <div style="padding-top:50px;padding-bottom:100px" *ngIf="replys==1">
+                <div *ngFor="let items of returnReplysArray;let i = index">
+                    <div>
+                        <div>
+                            <div class="{{items.class}}" *ngIf="items.fromNameHow == 1 && items.fromNameExiset==1">{{sentFrom}}: {{you}} </div>
+                            <div class="{{items.class}}" *ngIf="items.fromNameHow != 1 && items.fromNameExiset==1">{{sentFrom}}: {{items.fromName}} </div>
+                            <div class="{{items.class}}" *ngIf="items.fromNameHow != 1 && items.fromNameExiset!=1">{{sentFrom}}: {{items.fromName}} </div>
+                            <div class="{{items.class}}" *ngIf="items.toNameType ==0">{{sentTo}}: {{allMaintenanceSupervisors}} {{items.toName}} </div>
+                            <div class="{{items.class}}" *ngIf="items.toNameType ==1">{{sentTo}}: {{departmentManager}}: {{items.departmentsEn}}</div>
+                            <div class="{{items.class}}" *ngIf="items.toNameType ==2">{{sentTo}}: {{maintenanceManager}} </div>
+                            <div class="{{items.class}}" *ngIf="items.toNameType ==3">{{sentTo}}: {{maintenanceSupervisor}} </div>
+                            <div class="{{items.class}}" *ngIf="items.toNameType ==4">{{sentTo}}: {{generalManager}} </div>
+                            <div class="{{items.class}}" style="color:green; font-weight:bold; font-size:14px">{{dateTime}}: {{items.date}} </div>
+                        </div>
+                        <div (click)="functionSeeMessage(items.content,items.id)" style="padding-top:5px; color:#0f75bd; font-size:11px; text-align:end">
+                           <img src="../../assets/imgs/seenReply.png" style="width:28px;margin-right: 20px;"><br>{{viewMessage}}
+                        </div>
+                    </div>
+                    <div style="width:100%;border-top:2px solid #ccc; margin-top:5px"></div>
+                </div>
+           </div>
+           <div class="divEmptyVal" *ngIf="replys==0">
+                <div>
+                    <img src="../../assets/imgs/noData.png" style="width:150px; height:150px">
+                </div>
+                <div class="emptyFirstText">
+                   {{sorry}} 
+                </div>
+                <div class="emptyLastText">
+                    {{sorryReson}}
+                </div>
+            </div>
+     </div>
+     <!--department suberviser-->
+    <ion-footer  class="ion-no-border" style="position:fixed;bottom:0px">
+       <ion-toolbar class="footerToolbar">
+        <div class="width100">
+            <div class="menueClass" (click)="functionHome()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/home.png" style="width:18px"></div>
+            	<div class="labelClass">{{menu5}}</div>
+            </div>
+            <div class="menueClass" (click)="functionAccount()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/information.png" style="width:18px"></div>
+                <div class="labelClass">{{menu7}}</div>
+            </div>
+            <div class="menueClass" [ngStyle]="{'float': float}" style="height:60px">
+            	<div></div>
+            </div>
+             <!--department maneger-->
+            <div class="menueClass" (click)="functionTeam()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/team.png" style="width:18px"></div>
+                <div class="labelClass">{{menu8}}</div>
+            </div>
+            <!--department maneger-->
+             <div class="menueClass" (click)="settings()"  [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/setting.png" style="width:18px"></div>
+                <div class="labelClass">{{menu3}}</div>
+            </div>
+        </div>
+        </ion-toolbar>
+    </ion-footer>
+        <div class="addImageCss" *ngIf="type=='itMan'"><img src="../../assets/imgs/newRequest.png" class="addImageclass"></div>
+        <div class="addImageCss" *ngIf="type=='man' || (departmentId!=1 && type=='suber')"><img (click)="functionAddrequest()" src="../../assets/imgs/add.png" class="addImageclass"></div>
+          
+</ion-content>

@@ -1,0 +1,316 @@
+<ion-header>
+  <ion-toolbar  class="headerToolbar">
+    <ion-title>
+        <div>
+            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                <ion-row>
+                    <ion-col class="textAlignStart" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                            <ion-icon name="{{arrowBack}}" slot="icon-only" class="PNIcon"  (click)="functionHome()"></ion-icon>
+                        </div>
+                    </ion-col>
+                     <ion-col class="textAlignCenter" size="8">
+                    	<div style="font-size:20px;color:#000000">
+                       {{requestsTitle}}
+                        </div>
+                    </ion-col>
+                    <ion-col class="textAlignEnd" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                        <ion-badge *ngIf="newNotifications!=0" class="classValData" slot="start" mode='ios'>{{newNotifications}}</ion-badge>
+                        <ion-icon name="notifications" slot="icon-only" class="PNIcon"  (click)="functionPushNotifications()"></ion-icon>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="startWightCurv">
+        <div class="wightCurv"></div>
+    </div>
+     <div class="allPage">
+        <div class="sortingFilterLargDiv" [ngStyle]="{'direction': dirTow}">
+            <div class="sortingFilterSecoundDiv">
+                <div class="sortingFilterDiv" (click)="filterVal()"><img src="../../assets/imgs/sorting.png" style="width:22px"></div>
+                <div class="borderDiv"></div>
+                <div class="sortingFilterDiv"(click)="sortingVal(sortingValues)">
+                    <img src="../../assets/imgs/sortone.png" *ngIf="sortingValues == 2" style="width:25px">
+                    <img src="../../assets/imgs/sorttoe.png" *ngIf="sortingValues == 1" style="width:25px">
+                </div>
+            </div>
+        </div>
+            <div style="padding-top:50px" *ngIf="request==1">
+                <div *ngFor="let items of returnRequestArray;let i = index">
+                    <div *ngIf="items.show == 1">
+                        <div>
+                            <div class="ordersInformation" style="color:#D10000; font-weight:bold; font-size:14px">{{requestNumber}}: #{{items.id}} </div>
+                            <div class="ordersInformation" style="color:#D10000;">{{insertTime}}: {{items.insertTime}}</div>
+                            <div class="ordersInformation">{{urgency}}: {{items.urgency}}</div>
+                            <div class="ordersInformation">{{machineNumber}}#: {{items.machineNumber}}</div>
+                            <div class="ordersInformation">{{machineStatus}}: {{items.machineWorkingStatus}}</div>
+                            <div class="ordersInformation" *ngIf="typeId == 1 && (getDataByUser == 2 || getDataByUser == 3)">{{approvedTime}}: {{items.lastStatusTime}}</div>
+                            <div class="ordersInformation" *ngIf="typeId == 2 && (getDataByUser == 2 || getDataByUser == 3 || getDataByUser == 4)">{{startWorkTime}}: {{items.lastStatusTime}}</div>
+                            <div class="ordersInformation" *ngIf="typeId == 3 && (getDataByUser == 2 || getDataByUser == 3 || getDataByUser == 4)">{{finishedTime}}: {{items.lastStatusTime}}</div>
+                            <div class="ordersInformation" *ngIf="typeId == 4 && (getDataByUser == 2 || getDataByUser == 3)">{{closedTime}}: {{items.closedTime}}</div>
+                        
+                        
+                        
+                        
+                        </div>
+                        <div *ngIf="getDataByUser==1">
+                        <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                            <ion-row>
+                                <ion-col class="textAlignCenter" >
+                                    <div style="padding-top:5px">
+                                        <div class="divButtonClass">
+                                            <ion-button class="oneButton fontSize14" (click)="functionDetails(items.id,i)" id="submit">{{details}}</ion-button>
+                                        </div>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        </div>
+                        <div *ngIf="getDataByUser==2">
+                            <ion-grid *ngIf="typeId == 0" [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                                <ion-row>
+                                    <ion-col class="textAlignCenter" size="4">
+                                        <div style="padding-top:5px">
+                                            <div class="divButtonClass">
+                                                <ion-button class="oneButton fontSize14" (click)="functionDetails(items.id,i)" id="submit">{{details}}</ion-button>
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                    <ion-col class="textAlignCenter" size="4">
+                                        <div style="padding-top:5px">
+                                            <div class="divButtonClass">
+                                                <ion-button class="oneButton fontSize14"  (click)="functionApproval(items.id,i)" id="submit">{{approval}}</ion-button>
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                    <ion-col class="textAlignCenter" size="4">
+                                        <div style="padding-top:5px">
+                                            <div class="divButtonClass">
+                                                <ion-button class="oneButton fontSize14" (click)="functionRefusal(items.id,i)" id="submit">{{refusal}}</ion-button>
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                            <ion-grid *ngIf="typeId == 1 || typeId == 2 || typeId == 3 || typeId == 4 || typeId == 6" [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                                <ion-row>
+                                    <ion-col class="textAlignCenter">
+                                        <div style="padding-top:5px">
+                                            <div class="divButtonClass">
+                                                <ion-button class="oneButton fontSize14" (click)="functionDetails(items.id,i)" id="submit">{{details}}</ion-button>
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                        <div *ngIf="getDataByUser==3">
+                        <ion-grid *ngIf="typeId == 1" [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                            <ion-row>
+                                <ion-col class="textAlignCenter" size="3">
+                                    <div style="padding-top:5px">
+                                        <div class="divButtonClass">
+                                            <ion-button class="oneButton fontSize14" (click)="functionDetails(items.id,i)" id="submit">{{details}}</ion-button>
+                                        </div>
+                                    </div>
+                                </ion-col>
+                                <ion-col class="textAlignCenter" size="3">
+                                    <div style="padding-top:5px">
+                                        <div class="divButtonClass">
+                                            <ion-button class="oneButton fontSize14" (click)="functionRouting(items.id,i)" id="submit">{{routing}}</ion-button>
+                                        </div>
+                                    </div>
+                                </ion-col>
+                                <ion-col class="textAlignCenter" size="3">
+                                    <div style="padding-top:5px">
+                                        <div class="divButtonClass">
+                                            <ion-button class="oneButton fontSize14" (click)="functionRefusalMa(items.id,i)" id="submit">{{refusal}}</ion-button>
+                                        </div>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <ion-grid *ngIf="typeId == 6 || typeId == 4" [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                            <ion-row>
+                                <ion-col class="textAlignCenter" size="6">
+                                    <div style="padding-top:5px">
+                                        <div class="divButtonClass">
+                                            <ion-button class="oneButton fontSize14" (click)="functionDetails(items.id,i)" id="submit">{{details}}</ion-button>
+                                        </div>
+                                    </div>
+                                </ion-col>
+                                <ion-col class="textAlignCenter" size="6">
+                                    <div style="padding-top:5px">
+                                        <div class="divButtonClass">
+                                            <ion-button class="oneButton fontSize14" (click)="functionRefusalMa(items.id,i)" id="submit">{{refusal}}</ion-button>
+                                        </div>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <ion-grid *ngIf="typeId == 6 || typeId == 4" [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                            <ion-row>
+                                <ion-col class="textAlignCenter" size="6">
+                                    <div style="padding-top:5px">
+                                        <div class="divButtonClass">
+                                            <ion-button class="oneButton fontSize14" (click)="functionDetails(items.id,i)" id="submit">{{details}}</ion-button>
+                                        </div>
+                                    </div>
+                                </ion-col>
+                                <ion-col class="textAlignCenter" size="6">
+                                    <div style="padding-top:5px">
+                                        <div class="divButtonClass">
+                                            <ion-button class="oneButton fontSize14" (click)="functionRefusalMa(items.id,i)" id="submit">{{refusal}}</ion-button>
+                                        </div>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <ion-grid *ngIf="typeId == 3" [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                            <ion-row>
+                                <ion-col class="textAlignCenter" size="6">
+                                    <div style="padding-top:5px">
+                                        <div class="divButtonClass">
+                                            <ion-button class="oneButton fontSize14" (click)="functionDetails(items.id,i)" id="submit">{{details}}</ion-button>
+                                        </div>
+                                    </div>
+                                </ion-col>
+                                <ion-col class="textAlignCenter" size="6">
+                                    <div style="padding-top:5px">
+                                        <div class="divButtonClass">
+                                            <ion-button class="oneButton fontSize14" (click)="functionWorkingDetails(items.id,i)" id="submit">{{workingDetails}}</ion-button>
+                                        </div>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <ion-grid *ngIf="typeId == 4" [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                            <ion-row>
+                                <ion-col class="textAlignCenter" size="6">
+                                    <div style="padding-top:5px">
+                                        <div class="divButtonClass">
+                                            <ion-button class="oneButton fontSize14" (click)="functionDetails(items.id,i)" id="submit">{{details}}</ion-button>
+                                        </div>
+                                    </div>
+                                </ion-col>
+                                <ion-col class="textAlignCenter" size="6">
+                                    <div style="padding-top:5px">
+                                        <div class="divButtonClass">
+                                            <ion-button class="oneButton fontSize14" (click)="functionReopen(items.id,i)" id="submit">{{reopen}}</ion-button>
+                                        </div>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        </div>
+                        <div *ngIf="getDataByUser==4">
+                            <ion-grid *ngIf="typeId == 2" [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                                <ion-row>
+                                    <ion-col class="textAlignCenter" size="3">
+                                        <div style="padding-top:5px">
+                                            <div class="divButtonClass">
+                                                <ion-button class="oneButton fontSize14" (click)="functionDetails(items.id,i)" id="submit">{{details}}</ion-button>
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                    <ion-col class="textAlignCenter" size="3">
+                                        <div style="padding-top:5px">
+                                            <div class="divButtonClass">
+                                                <ion-button class="oneButton fontSize14" (click)="functionWorkingDetails(items.id,i)" id="submit">{{workingDetails}}</ion-button>
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                     <ion-col class="textAlignCenter" size="3">
+                                        <div style="padding-top:5px">
+                                            <div class="divButtonClass">
+                                                <ion-button class="oneButton fontSize14" (click)="functionFinished(items.id,i)" id="submit">{{finished}}</ion-button>
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                            <ion-grid *ngIf="typeId == 2" [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                                <ion-row>
+                                    <ion-col class="textAlignCenter" size="3">
+                                        <div style="padding-top:5px">
+                                            <div class="divButtonClass">
+                                                <ion-button class="oneButton fontSize14" (click)="functionDetails(items.id,i)" id="submit">{{details}}</ion-button>
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                    <ion-col class="textAlignCenter" size="3">
+                                        <div style="padding-top:5px">
+                                            <div class="divButtonClass">
+                                                <ion-button class="oneButton fontSize14" (click)="functionWorkingDetails(items.id,i)" id="submit">{{workingDetails}}</ion-button>
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                     <ion-col class="textAlignCenter" size="3">
+                                        <div style="padding-top:5px">
+                                            <div class="divButtonClass">
+                                                <ion-button class="oneButton fontSize14" (click)="functionStart(items.id,i)" id="submit">{{start}}</ion-button>
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                    </div>
+                    <div style="width:100%;border-top:2px solid #ccc; margin-top:5px"></div>
+                </div>
+           </div>
+           <div class="divEmptyVal" *ngIf="request==0">
+                <div>
+                    <img src="../../assets/imgs/noData.png" style="width:150px; height:150px">
+                </div>
+                <div class="emptyFirstText">
+                   {{sorry}} 
+                </div>
+                <div class="emptyLastText">
+                    {{sorryReson}}
+                </div>
+            </div>
+     </div>
+     <!--department suberviser-->
+    <ion-footer  class="ion-no-border" style="position:fixed;bottom:0px">
+       <ion-toolbar class="footerToolbar">
+        <div class="width100">
+            <div class="menueClass" (click)="functionHome()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/home.png" style="width:18px"></div>
+            	<div class="labelClass">{{menu5}}</div>
+            </div>
+            <div class="menueClass" (click)="functionAccount()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/information.png" style="width:18px"></div>
+                <div class="labelClass">{{menu7}}</div>
+            </div>
+            <div class="menueClass" [ngStyle]="{'float': float}" style="height:60px">
+            	<div></div>
+            </div>
+            <!--department suberviser-->
+            <div class="menueClass menueClassActive" *ngIf="type=='suber'"  (click)="functionRequest()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/ordersSelected.png" style="width:18px"></div>
+                <div class="labelClass">{{menu6}}</div>
+            </div>
+            <!--department suberviser-->
+             <!--department maneger-->
+            <div class="menueClass" *ngIf="type=='man' || type=='itMan'" (click)="functionTeam()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/team.png" style="width:18px"></div>
+                <div class="labelClass">{{menu8}}</div>
+            </div>
+            <!--department maneger-->
+             <div class="menueClass" (click)="settings()"  [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/setting.png" style="width:18px"></div>
+                <div class="labelClass">{{menu3}}</div>
+            </div>
+        </div>
+        </ion-toolbar>
+    </ion-footer>
+        <div class="addImageCss" *ngIf="departmentId!=1"><img (click)="functionAddrequest()" src="../../assets/imgs/add.png" class="addImageclass"></div>
+        <div class="addImageCss" *ngIf="departmentId==1"><img (click)="functionNewtasks()" src="../../assets/imgs/newRequest.png" class="addImageclass"></div>
+</ion-content>

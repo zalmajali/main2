@@ -1,0 +1,16 @@
+<ion-content>
+ 	<div class="marginTop20 textAlignCenter" (click)="closeModel()">
+   		<div><img src="../../assets/imgs/cancel.png" style="width:30px"></div>
+    </div>
+    	<div *ngIf="ShowVal==1">
+        <ion-slides pager="true" [options]="slideOpts" autoPlay="true" loop="true" (ionSlidesDidLoad)="slidesBannersLoad()" (ionSlideDidChange)="slidesBannersLoad()" #slidesBanners>
+            <ion-slide *ngFor="let items of returninfoArray">
+               <div>
+               	<div class="paddingTop5"><ion-img src={{items.image}}></ion-img></div>
+                <div class="title">{{items.title}}</div>
+               <div class="contant" [innerHTML]="items.content"></div>
+                </div>
+            </ion-slide>
+        </ion-slides>
+    </div>
+</ion-content>

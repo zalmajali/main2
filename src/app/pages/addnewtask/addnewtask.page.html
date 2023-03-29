@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar  class="headerToolbar">
+    <ion-title>
+         <div>
+            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                <ion-row>
+                    <ion-col class="textAlignStart" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                            <ion-icon name="{{arrowBack}}" slot="icon-only" class="PNIcon"  (click)="functionBackHome()"></ion-icon>
+                        </div>
+                    </ion-col>
+                     <ion-col class="textAlignCenter" size="8">
+                    	<div style="font-size:20px;color:#000000">
+                       {{addNewTask}}
+                        </div>
+                    </ion-col>
+                    <ion-col class="textAlignEnd" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                        <ion-badge *ngIf="newNotifications!=0" class="classValData" slot="start" mode='ios'>{{newNotifications}}</ion-badge>
+                        <ion-icon name="notifications" slot="icon-only" class="PNIcon"  (click)="functionPushNotifications()"></ion-icon>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="startWightCurv">
+        <div class="wightCurv"></div>
+    </div>
+     <div class="allPage">
+      <div class="marginTop20">
+            <form style="display: contents;" (ngSubmit)="addTask()">
+             
+             <div class="paddingBottom12">
+             <ion-item [ngStyle]="{'direction': dir}" lines="none" class="{{errorOrderId}}">
+                <ion-select mode="ios" placeholder="{{placeholderOrderId}}" (ionChange) = "checkOrderId($event.target.value)" [ngStyle]="{'direction': dir}" cancelText="{{settingsNo}}" okText="{{settingsYas}}">
+                   <ion-select-option *ngFor="let items of returnRequestArray" value="{{items.id}}">{{items.number}}</ion-select-option>
+                </ion-select>
+              </ion-item>	
+                <div class="errorTitle" *ngIf="isErrorOrderId == 0">{{isErrorOrderIdMsg}}</div>
+            </div>
+            <div class="paddingBottom12" *ngIf="showvalues==1">
+             <ion-item [ngStyle]="{'direction': dir}" lines="none" class="{{errorEmployeesId}}">
+                <ion-select mode="ios" placeholder="{{placeholderEmployeesId}}" (ionChange) = "checkEmployeesId($event.target.value)" [ngStyle]="{'direction': dir}" cancelText="{{settingsNo}}" okText="{{settingsYas}}">
+                   <ion-select-option *ngFor="let items of returnEmployeesArray" value="{{items.id}}">{{items.fullName}}</ion-select-option>
+                </ion-select>
+              </ion-item>	
+                <div class="errorTitle" *ngIf="isErrorEmployeesId == 0">{{isErrorEmployeesIdMsg}}</div>
+            </div>
+            
+             <div>
+              <div class="divButtonClass">
+                <ion-button class="oneButton fontSize14" (click)="addTask()" disabled="{{!isdisabled}}" id="submit">{{add}}</ion-button>
+              </div>
+            </div>
+            <button style="visibility:hidden" id="submit" ion-button type="submit" ></button>
+            </form>
+        </div>
+     </div>
+     <!--department suberviser-->
+    <ion-footer  class="ion-no-border" style="position:fixed;bottom:0px">
+       <ion-toolbar class="footerToolbar">
+        <div class="width100">
+            <div class="menueClass" (click)="functionHome()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/home.png" style="width:18px"></div>
+            	<div class="labelClass">{{menu5}}</div>
+            </div>
+            <div class="menueClass" (click)="functionAccount()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/information.png" style="width:18px"></div>
+                <div class="labelClass">{{menu7}}</div>
+            </div>
+            <div class="menueClass" [ngStyle]="{'float': float}" style="height:60px">
+            	<div></div>
+            </div>
+            <!--department suberviser-->
+             <div class="menueClass" (click)="functionTeam()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/team.png" style="width:18px"></div>
+                <div class="labelClass">{{menu8}}</div>
+            </div>
+            <!--department maneger-->
+             <div class="menueClass" (click)="settings()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/setting.png" style="width:18px"></div>
+                <div class="labelClass">{{menu3}}</div>
+            </div>
+        </div>
+        </ion-toolbar>
+    </ion-footer>
+    <div class="addImageCss" (click)="functionAddrequest()"><img src="../../assets/imgs/add.png" class="addImageclass"></div>
+</ion-content>

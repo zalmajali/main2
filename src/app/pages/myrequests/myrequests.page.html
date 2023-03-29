@@ -1,0 +1,254 @@
+<ion-header>
+  <ion-toolbar  class="headerToolbar">
+    <ion-title>
+        <div>
+            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                <ion-row>
+                    <ion-col class="textAlignStart" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                            <ion-icon name="{{arrowBack}}" slot="icon-only" class="PNIcon"  (click)="functionHome()"></ion-icon>
+                        </div>
+                    </ion-col>
+                     <ion-col class="textAlignCenter" size="8">
+                    	<div style="font-size:20px;color:#000000">
+                       {{requestsTitle}}
+                        </div>
+                    </ion-col>
+                    <ion-col class="textAlignEnd" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                        <ion-badge *ngIf="newNotifications!=0" class="classValData" slot="start" mode='ios'>{{newNotifications}}</ion-badge>
+                        <ion-icon name="notifications" slot="icon-only" class="PNIcon"  (click)="functionPushNotifications()"></ion-icon>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refrechAllPage($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+    <div class="startWightCurv">
+        <div class="wightCurv"></div>
+    </div>
+     <div class="allPage">
+        <div class="sortingFilterLargDiv" [ngStyle]="{'direction': dirTow}">
+            <div class="sortingFilterSecoundDiv">
+                <div class="sortingFilterDiv" (click)="filterVal()"><img src="../../assets/imgs/sorting.png" style="width:22px"></div>
+                <div class="borderDiv"></div>
+                <div class="sortingFilterDiv"(click)="sortingVal(sortingValues)">
+                    <img src="../../assets/imgs/sortone.png" *ngIf="sortingValues == 2" style="width:25px">
+                    <img src="../../assets/imgs/sorttoe.png" *ngIf="sortingValues == 1" style="width:25px">
+                </div>
+            </div>
+        </div>
+            <div style="padding-top:50px;padding-bottom:100px" *ngIf="request==1">
+                <div *ngFor="let items of returnRequestArray;let i = index">
+                    <div *ngIf="items.show == 1">
+                        <div>
+                            <div class="ordersInformation" style="color:#D10000; font-weight:bold; font-size:14px">{{requestNumber}}: #{{items.id}} </div>
+                            <div class="ordersInformation" style="color:green; font-weight:bold; font-size:14px">{{insertTime}}: {{items.insertTime}}</div>
+                            <div class="ordersInformation">{{urgency}}: {{items.urgency}}</div>
+                            <div class="ordersInformation">{{machineNumber}}#: {{items.machineNumber}}</div>
+                            <div class="ordersInformation">{{machineStatus}}: {{items.machineWorkingStatus}}</div>
+                            <div class="ordersInformation" *ngIf="items.lastStatus == 0"></div>
+                            <div class="ordersInformation" *ngIf="items.lastStatus == 1">{{approvedBy}}: {{items.lastStatusIssuerName}} {{items.lastStatusTime}}</div>
+                            <div class="ordersInformation" *ngIf="items.lastStatus == 2">{{inProgressBy}}: {{items.lastStatusIssuerName}} {{items.lastStatusTime}}</div>
+                            <div class="ordersInformation" *ngIf="items.lastStatus == 3">{{resolvedBy}}: {{items.lastStatusIssuerName}} {{items.lastStatusTime}}</div>
+                            <div class="ordersInformation" *ngIf="items.lastStatus == 4">{{canceledBy}}: {{items.lastStatusIssuerName}} {{items.lastStatusTime}}</div>
+                            <div class="ordersInformation" *ngIf="items.lastStatus == 5">{{reopenedBy}}: {{items.lastStatusIssuerName}} {{items.lastStatusTime}}</div>
+                        </div>
+                        <div *ngIf="getDataByUser==1">
+                        <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                            <ion-row>
+                                <ion-col class="textAlignCenter" >
+                                    <div style="padding-top:5px">
+                                        <div class="divButtonClass">
+                                            <ion-button class="oneButton fontSize12" (click)="functionDetails(items.id,i)" id="submit">{{details}}</ion-button>
+                                        </div>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        </div>
+                        <div *ngIf="getDataByUser==2">
+                            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                                <ion-row>
+                                   <ion-col class="textAlignLeft">
+                                        <div (click)="functionDetails(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:11px">
+                                           <img src="../../assets/imgs/details.png" style="width:30px"><br>{{details}}
+                                        </div>
+                                    </ion-col>
+                                    <ion-col *ngIf="items.lastStatus == 0" class="textAlignLeft">
+                                        <div (click)="functionEdit(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:12px">
+                                           <img src="../../assets/imgs/edit.png" style="width:30px"><br>{{orderEdit}}
+                                        </div>
+                                    </ion-col>
+                                    <ion-col *ngIf="items.lastStatus == 0" class="textAlignLeft">
+                                        <div (click)="functionRefusal(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:12px">
+                                           <img src="../../assets/imgs/delete.png" style="width:30px"><br>{{orderDelete}}
+                                        </div>
+                                    </ion-col>
+                                    <ion-col class="textAlignLeft" *ngIf="items.lastStatus == 0">
+                                        <div (click)="functionApproval(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:12px">
+                                           <img src="../../assets/imgs/approval.png" style="width:30px"><br>{{approval}}
+                                        </div>
+                                    </ion-col> 
+                                     <ion-col class="textAlignLeft" *ngIf="items.lastStatus == 3 || items.lastStatus == 4">
+                                        <div (click)="functionOperations(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:12px">
+                                           <img src="../../assets/imgs/operations.png" style="width:30px"><br>{{operations}}
+                                        </div>
+                                    </ion-col> 
+                                    <ion-col class="textAlignLeft" *ngIf="items.lastStatus == 4">
+                                       <div (click)="functionReason(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:12px">
+                                           <img src="../../assets/imgs/reason.png" style="width:30px"><br>{{reason}}
+                                        </div>
+                                    </ion-col>
+                                    <ion-col class="textAlignLeft" *ngIf="items.lastStatus == 4">
+                                       <div (click)="functionReopen(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:11px">
+                                           <img src="../../assets/imgs/reopen.png" style="width:30px"><br>{{reopen}}
+                                        </div>
+                                    </ion-col>
+                                     <ion-col class="textAlignLeft" *ngIf="items.lastStatus != 0">
+                                        <div (click)="functionCorrespondence(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:11px">
+                                           <img src="../../assets/imgs/correspondence.png" style="width:30px"><br>{{correspondence}}
+                                        </div>
+                                    </ion-col> 
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                        <div *ngIf="getDataByUser==3">
+                            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                                <ion-row>
+                                    <ion-col class="textAlignLeft">
+                                        <div (click)="functionDetails(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:11px">
+                                           <img src="../../assets/imgs/details.png" style="width:30px"><br>{{details}}
+                                        </div>
+                                    </ion-col>
+                                    <ion-col *ngIf="items.lastStatus == 0" class="textAlignLeft">
+                                        <div (click)="functionEdit(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:12px">
+                                           <img src="../../assets/imgs/edit.png" style="width:30px"><br>{{orderEdit}}
+                                        </div>
+                                    </ion-col>
+                                    <ion-col *ngIf="items.lastStatus == 0" class="textAlignLeft">
+                                        <div (click)="functionRefusal(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:12px">
+                                           <img src="../../assets/imgs/delete.png" style="width:30px"><br>{{orderDelete}}
+                                        </div>
+                                    </ion-col>
+                                    <ion-col class="textAlignLeft" *ngIf="items.lastStatus == 0">
+                                        <div (click)="functionApproval(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:12px">
+                                           <img src="../../assets/imgs/approval.png" style="width:30px"><br>{{approval}}
+                                        </div>
+                                    </ion-col>
+                                     <ion-col *ngIf="items.lastStatus == 1 || items.lastStatus == 2 || items.lastStatus == 5" class="textAlignLeft">
+                                        <div (click)="functionCancel(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:12px">
+                                           <img src="../../assets/imgs/cancelRe.png" style="width:30px"><br>{{cancel}}
+                                        </div>
+                                    </ion-col>
+                                     <ion-col class="textAlignLeft" *ngIf="items.lastStatus == 3 || items.lastStatus == 4">
+                                        <div (click)="functionOperations(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:12px">
+                                           <img src="../../assets/imgs/operations.png" style="width:30px"><br>{{operations}}
+                                        </div>
+                                    </ion-col> 
+                                    <ion-col class="textAlignLeft" *ngIf="items.lastStatus == 4">
+                                       <div (click)="functionReason(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:12px">
+                                           <img src="../../assets/imgs/reason.png" style="width:30px"><br>{{reason}}
+                                        </div>
+                                    </ion-col>
+                                    <ion-col class="textAlignLeft" *ngIf="items.showToAdmin == 0 && items.showToAdminButtom==1 && items.lastStatus==1">
+                                        <div (click)="functionShowAdmin(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:11px">
+                                           <img src="../../assets/imgs/showMan.png" style="width:30px"><br>{{showGeneralIcon}}
+                                        </div>
+                                    </ion-col>
+                                    <ion-col class="textAlignLeft" *ngIf="items.lastStatus == 4">
+                                       <div (click)="functionReopen(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:11px">
+                                           <img src="../../assets/imgs/reopen.png" style="width:30px"><br>{{reopen}}
+                                        </div>
+                                    </ion-col>
+                                     <ion-col class="textAlignLeft" *ngIf="items.lastStatus == 2 || items.lastStatus == 5">
+                                        <div (click)="functionTasks(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:11px">
+                                           <img src="../../assets/imgs/tasks.png" style="width:30px"><br>{{tasks}}
+                                        </div>
+                                    </ion-col>
+                                    <ion-col class="textAlignLeft" *ngIf="items.lastStatus == 1">
+                                       <div (click)="functionStart(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:11px">
+                                           <img src="../../assets/imgs/start.png" style="width:30px"><br>{{start}}
+                                        </div>
+                                    </ion-col>
+                                     <ion-col class="textAlignLeft" *ngIf="items.lastStatus == 2 || items.lastStatus == 5">
+                                        <div (click)="functionFinish(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:11px">
+                                           <img src="../../assets/imgs/finish.png" style="width:30px"><br>{{finish}}
+                                        </div>
+                                    </ion-col>
+                                     <ion-col class="textAlignLeft" *ngIf="items.lastStatus != 0">
+                                        <div (click)="functionCorrespondence(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:11px">
+                                           <img src="../../assets/imgs/correspondence.png" style="width:30px"><br>{{correspondence}}
+                                        </div>
+                                    </ion-col> 
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                        
+                    </div>
+                    <div style="width:100%;border-top:2px solid #ccc; margin-top:5px" *ngIf="items.show == 1"></div>
+                </div>
+           </div>
+           <div class="divEmptyVal" *ngIf="request==0">
+                <div>
+                    <img src="../../assets/imgs/noData.png" style="width:150px; height:150px">
+                </div>
+                <div class="emptyFirstText">
+                   {{sorry}} 
+                </div>
+                <div class="emptyLastText">
+                    {{sorryReson}}
+                </div>
+            </div>
+     </div>
+     <!--department suberviser-->
+    <ion-footer  class="ion-no-border" style="position:fixed;bottom:0px">
+       <ion-toolbar class="footerToolbar">
+        <div class="width100">
+            <div class="menueClass" (click)="functionHome()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/home.png" style="width:18px"></div>
+            	<div class="labelClass">{{menu5}}</div>
+            </div>
+            <div class="menueClass" (click)="functionAccount()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/information.png" style="width:18px"></div>
+                <div class="labelClass">{{menu7}}</div>
+            </div>
+            <div class="menueClass" [ngStyle]="{'float': float}" style="height:60px">
+            	<div></div>
+            </div>
+            <!--department suberviser-->
+              <div class="menueClass" *ngIf="departmentId!=1 && type=='suber'"  (click)="functionRequest()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/orders.png" style="width:18px"></div>
+                <div class="labelClass">{{menu6}}</div>
+            </div>
+             <!--department maneger-->
+            <div class="menueClass" *ngIf="type=='man' || type=='itMan'" (click)="functionTeam()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/team.png" style="width:18px"></div>
+                <div class="labelClass">{{menu8}}</div>
+            </div>
+            <!--department maneger-->
+            <div class="menueClass" *ngIf="departmentId==1 && type=='suber'"  (click)="functionNewtasks()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/orders.png" style="width:18px"></div>
+                <div class="labelClass">{{newTasks}}</div>
+            </div>
+            <!--department maneger-->
+             <div class="menueClass" (click)="settings()"  [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/setting.png" style="width:18px"></div>
+                <div class="labelClass">{{menu3}}</div>
+            </div>
+        </div>
+        </ion-toolbar>
+    </ion-footer>
+        <div class="addImageCss" *ngIf="type=='man' || (departmentId!=1 && type=='suber')"><img (click)="functionAddrequest()" src="../../assets/imgs/add.png" class="addImageclass"></div>
+        <div class="addImageCss" *ngIf="departmentId==1 && type=='suber'"><img (click)="functionProgressTasks()" src="../../assets/imgs/newRequest.png" class="addImageclass"></div>
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreData($event)">
+        <ion-infinite-scroll-content loadingSpinner="none">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

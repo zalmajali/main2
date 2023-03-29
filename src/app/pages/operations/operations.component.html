@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar  class="headerToolbar">
+    <ion-title>
+         <div>
+            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                <ion-row>
+                    <ion-col class="textAlignStart" size="10" style="padding:0px">
+                    	<div style="padding-top:5px; color:#000000" class="fontSize20">
+                           {{mainLog}}: #{{requestId}}
+                        </div>
+                    </ion-col>
+                     <ion-col class="textAlignEnd" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                            <ion-icon name="close-circle-outline" slot="icon-only" class="PNIcon" (click)="closeModel()"></ion-icon>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<div class="allPage">
+    <div style="padding-top:0px" >
+        <div *ngFor="let items of returninfoArray;let i = index">
+            <div>
+                <div [ngStyle]="{'direction': dir}">
+                    <div class="ordersInformation">{{status}}: {{items.status}}</div>
+                    <div class="ordersInformation" *ngIf="items.departmentName!=0">{{department}}:{{items.departmentName}} </div>                    
+                    <div class="ordersInformation" *ngIf="items.existing == 1 && items.type==1">{{by}}: {{supervisor}} {{items.fullName}}</div>
+                    <div class="ordersInformation" *ngIf="items.existing == 1 && items.type==2">{{by}}: {{manager}} {{items.fullName}}</div>
+                    <div class="ordersInformation" *ngIf="items.existing == 2 && items.type==1">{{by}}: {{formerEmployee}} {{items.fullName}}</div>
+                    <div class="ordersInformation" *ngIf="items.existing == 2 && items.type==2">{{by}}: {{formerEmployee}} {{manager}} {{items.fullName}}</div>
+                    <div class="ordersInformation" style="color:#D10000;">{{insertTime}}: {{items.statusTime}}</div>
+                </div>
+            </div>
+            <div style="width:100%;border-top:2px solid #ccc; margin-top:5px"></div>
+        </div>
+   </div>
+   <div class="divEmptyVal" *ngIf="ShowVal!=1">
+        <div>
+            <img src="../../assets/imgs/noData.png" style="width:150px; height:150px">
+        </div>
+        <div class="emptyFirstText">
+           {{sorry}} 
+        </div>
+        <div class="emptyLastText">
+            {{sorryReson}}
+        </div>
+    </div>
+ </div>
+</ion-content>

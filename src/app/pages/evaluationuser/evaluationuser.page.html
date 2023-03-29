@@ -1,0 +1,86 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="headerToolbar">
+    <ion-title>
+        <div class="palanceText"> رصيد الخدمات </div>
+        <div class="palancePoints">{{points}}</div>
+        <div class="point">نقطة<br>مقايضة</div>
+    </ion-title>
+    <ion-buttons slot="start">
+       <div (click)="functionOpenMenue()"><img src="../../assets/imgs/Group871.png" style="width:28px"></div>
+       <div (click)="functionPushNotifications()" style="padding-right:20px"><img src="../../assets/imgs/alert.png" style="width:17px"></div>
+       <ion-badge *ngIf="newNotifications!=0" class="classValData" slot="start" mode='ios'>{{newNotifications}}</ion-badge>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div style="padding:20px">
+    <div style="padding-bottom:15px; font-size:23px;color:#000000">تقييم مقدم الخدمة</div>
+    <div class="paddingBottom">
+        <ion-item lines="none">
+            <div style="margin: 11px 11px 10px 11px;"><img src="{{personalImage}}" style="width: 50px;border-radius: 100%;height: 50px;"></div>
+            <div style="height:50px">
+                <div style="font-size:12px; color:#000000">مقدم الخدمة</div>
+                <div style="font-size:18px; color:#000000; padding-top:5px">{{commercialName}}</div>
+            </div>
+        </ion-item>
+    </div>
+    <div>
+         <div class="starClass">
+            <div class="star" >
+              <div class="starBack">
+                 <div class="starcover">
+                  <img #val51 src="assets/imgs/starRate.png" (click)="functionNumRateStore(5,1)" class="imageRate"/>
+                  <img #val41 src="assets/imgs/starRate.png" (click)="functionNumRateStore(4,1)" class="imageRate"/>
+                  <img #val31 src="assets/imgs/starRate.png" (click)="functionNumRateStore(3,1)" class="imageRate"/>
+                  <img #val21 src="assets/imgs/starRate.png" (click)="functionNumRateStore(2,1)" class="imageRate"/>
+                  <img #val11 src="assets/imgs/starRate.png" (click)="functionNumRateStore(1,1)" class="imageRate"/>
+                 </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding-bottom:15px; padding-top:10px">
+       <form style="display: contents;" (ngSubmit)="saveAndBack()">
+        <div class="paddingBottom">
+            <ion-item lines="none">
+                <ion-textarea rows="5" [(ngModel)]="evalDetails" [ngModelOptions]="{standalone: true}" placeholder="اكتب تجربة مع مقدم الخدمة" (ionInput)="checkevalDetails($event.target.value)"></ion-textarea>
+            </ion-item>
+        </div>
+        <div>
+          <div class="divButtonClass">
+            <ion-button class="oneButton fontSize18" (click)="saveAndBack()" id="submit" disabled="{{!isdisabled}}"><span style="font-size:15px;padding-top:4px">تقييم</span></ion-button>
+          </div>
+        </div>
+        <button style="visibility:hidden" (click)="functionGoToHome()" id="submit" ion-button type="submit" ></button>
+        </form>
+   </div>
+    <div style="padding-bottom:15px; font-size:15px;color:#000000;text-align:center" (click)="functionGoToServ()">إلغاء</div>
+    </div>
+</ion-content>
+  <div class="menueValues"><img (click)="functionGoToSendPoint()" src="../../assets/imgs/sendPoint.png" style="width:70px"></div>
+        <ion-footer class="ion-no-border">
+        <ion-toolbar class="footerToolbar">
+            <div class="width100">
+                <div class="menueClass"  (click)="functionGoToHome()">
+                    <div><img src="../../assets/imgs/Group862.png" style="width:20px"></div>
+                    <div class="labelClass">الرئيسية</div>
+                </div>
+                <div class="menueClass" (click)="functionGoInvitations()">
+                    <div><img src="../../assets/imgs/Group863.png" style="width:18px"></div>
+                    <div class="labelClass">الدعوات</div>
+                </div>
+                <div class="menueClass" (click)="functionGoToSendPoint()">
+                    <div style="height:28px"></div>
+                    <div class="labelClass" style="font-size:15px">إرسال نقاط</div>
+                </div>
+                <div class="menueClass" (click)="functionGoToArchives()">
+                    <div><img src="../../assets/imgs/Group865.png" style="width:18px"></div>
+                    <div class="labelClass">السجل</div>
+                </div>
+                <div class="menueClass">
+                    <div><img src="../../assets/imgs/GroupSelect866.png" style="width:18px"></div>
+                    <div class="labelClass">حسابي</div>
+                </div>
+            </div>
+        </ion-toolbar>
+        </ion-footer>

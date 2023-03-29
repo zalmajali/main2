@@ -1,0 +1,229 @@
+/*start Header style*/
+.headerToolbar{
+--background: var(--ion-color-wight) !important;
+--border-width:0px !important;
+--padding-top:22px;
+--padding-bottom:0px;
+--padding-start:0px;
+--padding-end:0px;
+}
+ion-content{
+	--background: #F2FBFF;
+    background-size: cover;
+	background-position:center;
+}
+.header-md::after{
+	background-image:none;
+}
+ion-title{
+	padding-inline:5px !important;
+}
+.ios ion-title {
+   position: inherit;
+   width:100%;
+   padding-top: 0px;
+}
+.PNIcon{
+	font-size:24px;
+	color:#0F75BD
+}
+.classValData{
+    --background: #FFA500;
+    color: var(--ion-color-wight);
+    position: fixed;
+    top: 0px;
+    --padding-top: 4px;
+    --padding-end: 4px;
+    --padding-bottom: 4px;
+    --padding-start: 4px;
+    font-size: 9px;
+	font-weight:100;
+	z-index:100;
+}
+.showPas{
+	color: #0f75bd
+}
+/*end Header style*/
+/*start content style*/
+.allPage{
+	margin-bottom: 250px;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-left: 15px;
+	height: 100%;
+}
+.startWightCurv{
+	width: 100%;
+    text-align: center;
+    margin: 0px auto;
+    position: fixed;
+}
+.wightCurv{
+	width: 300px;
+    position: relative;
+    bottom: 40px;
+    border-radius: 100%;
+    background-color: var(--ion-color-wight);
+    height: 50px;
+    display: inline-table;
+}
+.addImageCss{
+	position: fixed;
+    text-align: center;
+    z-index: 100000000;
+    bottom: 45px;
+    height: 50px;
+    width: 100%;
+}
+.addImageclass{
+	width: 70px;
+    padding: 7px;
+    background: #F2FBFF;
+    border-radius: 100%;
+}
+ion-item{
+   --min-height:44px;
+   --background: var(--ion-color-wight);
+   --ion-background-color: var(--ion-color-wight);
+   --inner-padding-start:0px;
+   --padding-bottom:0px;
+   border-radius:9px;
+}
+ion-select{
+	--placeholder-color:var(--ion-color-formPlaseHolderColor);
+	--placeholder-opacity:1;
+	color:var(--ion-color-formPlaseHolderColor);
+	font-size:13px;
+}
+.errorFiled{
+	 border:1px solid red;
+}
+.errorTitle{
+    color: red;
+    font-size: 12px;
+    padding-top: 2px;	
+}
+.notTitle{
+    color: red;
+    font-size: 10px;
+    padding-top: 2px;	
+}
+ion-toolbar{
+	--background:#FFFFFF;
+}
+.succsessFiled{
+	 border:1px solid green;
+}
+ion-input{
+	--placeholder-color:var(--ion-color-formPlaseHolderColor);
+	--placeholder-opacity:1;
+	color:var(--ion-color-formPlaseHolderColor);
+	font-size:13px;
+	padding-top: 2px !important;
+}
+ion-textarea{
+	--placeholder-color:var(--ion-color-formPlaseHolderColor);
+	--placeholder-opacity:1;
+	color:var(--ion-color-formPlaseHolderColor);
+	font-size:13px;
+}
+.oneButton{
+	--background: #00ADEF;
+    --color: var(--ion-color-primary-contrast) !important;
+    --border-radius: 9px;
+    --padding: 0px;
+    height: 50px;
+    width: 93%;
+	text-transform:none;
+
+}
+.oneButton.activated{
+	--background:#00ADEF;
+	padding:0px;
+}
+.divButtonClass{
+	text-align:center;
+	padding-top:17px;
+}
+.keyDiv{
+	padding-left:7px;
+	padding-top:5px;
+	padding-right:7px
+}
+.ionTitle {
+  color: var(--ion-color-formPlaseHolderColor);
+  font-size: 13px;
+  font-weight:100;
+  text-align: start;
+  padding-top:7px !important;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+ion-segment{
+	background: #00ADEF;
+}
+ion-segment-button{
+	--color-checked:var(--ion-color-searchButton);
+	--color:#ffffff;
+	min-width: 50px;
+	--border-width:0px;
+	--indicator-color: #ffffff;
+}
+.divEmptyVal{
+    text-align: center;
+    padding-top: 200px;
+}
+.emptyFirstText{
+    font-size: 20px;
+    color:#0f75bd;
+    padding-bottom: 5px;
+}
+.emptyLastText{
+    font-size: 15px;
+     color:#0f75bd;
+}
+.titleUser{
+	font-size:18px;
+    line-height: 16px;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+	color:#000000;
+}
+/*start content style*/
+/*start footer menu style*/
+ion-icon {
+  font-size: 18px;
+}
+ion-footer{
+	background:#F2FBFF;
+}
+.footerToolbar{
+	--background: #0F75BD;
+    --border-width: 0px;
+    --padding-top: 0px;
+    --padding-bottom: 0px;
+    --padding-start: 0px;
+    --padding-end: 0px;
+    border-top-left-radius: 23px;
+    border-top-right-radius: 23px;
+    border-bottom-left-radius: 23px;
+    border-bottom-right-radius: 23px;
+}
+.menueClass{
+	background: #0F75BD;
+	width: 20%;
+    text-align: center;
+    padding-bottom: 8px;
+    cursor: pointer;
+    padding-top: 11px;
+	color:var(--ion-color-wight);
+}
+.menueClassActive{
+	color:#FFFF00;
+}
+.labelClass{
+	margin-top:-2px;
+	font-size:11px !important;
+}
+/*end footer menu style*/

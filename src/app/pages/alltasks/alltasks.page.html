@@ -1,0 +1,214 @@
+<ion-header>
+  <ion-toolbar  class="headerToolbar">
+    <ion-title>
+        <div>
+            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                <ion-row>
+                    <ion-col class="textAlignStart" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                            <ion-icon name="{{arrowBack}}" slot="icon-only" class="PNIcon"  (click)="functionBackHome()"></ion-icon>
+                        </div>
+                    </ion-col>
+                     <ion-col class="textAlignCenter" size="8">
+                    	<div style="font-size:18px;color:#000000" *ngIf="filterOne == 0 && filterTow == 0">
+                       	{{allTasks}}
+                        </div>
+                        <div class="titleUser"  *ngIf="filterOne == 1 && filterTow == 0">
+                       	{{taskForOrder}}: #{{orderId}}
+                        </div>
+                        <div class="titleUser"  *ngIf="filterTow == 1 && filterOne == 0">
+                       	{{taskForUser}}: {{fullName}}
+                        </div>
+                    </ion-col>
+                    <ion-col class="textAlignEnd" size="2" style="padding:0px">
+                    	<div style="padding-top:5px">
+                        <ion-badge *ngIf="newNotifications!=0" class="classValData" slot="start" mode='ios'>{{newNotifications}}</ion-badge>
+                        <ion-icon name="notifications" slot="icon-only" class="PNIcon"  (click)="functionPushNotifications()"></ion-icon>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refrechAllPage($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+    <div class="startWightCurv">
+        <div class="wightCurv"></div>
+    </div>
+     <div class="allPage">
+     		<div class="sortingFilterLargDivTow" *ngIf="filterOne==0 && filterTow==0" [ngStyle]="{'direction': dirTow}">
+                <div class="sortingFilterSecoundDivTow">
+                    <div class="sortingFilterDivTow" (click)="filterVal()"><img src="../../assets/imgs/sorting.png" style="width:22px"></div>
+                    <div class="borderDiv"></div>
+                    <div class="sortingFilterDivTow" (click)="functionAddTask()">
+                        <img src="../../assets/imgs/addTask.png" style="width:24px">
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="filterOne!=0 || filterTow!=0" class="sortingFilterLargDiv" [ngStyle]="{'direction': dirTow}">
+                <div class="sortingFilterSecoundDiv">
+                    <div class="sortingFilterDiv" (click)="functionAddTask()"><img src="../../assets/imgs/addTask.png" style="width:24px"></div>
+                </div>
+            </div>
+            <div style="padding-top:50px;padding-bottom:100px" *ngIf="tasks == 1">
+                <div *ngFor="let items of returnTasksArray;let i = index">
+                    <div *ngIf="items.show == 1">
+                        <div>
+                            <div class="ordersInformation" style="color:#D10000; font-weight:bold; font-size:14px">{{requestNumber}}: #{{items.requestId}}</div>
+                            <div class="ordersInformation" style="color:green; font-weight:bold; font-size:14px">{{insertTime}}: {{items.insertTime}}</div>
+                            <div class="ordersInformation">{{departmentName}}: {{items.departmentName}}</div>
+                            <div class="ordersInformation" *ngIf="items.exisetUser == 1">{{employee}}: {{supervisor}} {{items.employeeName}}</div>
+                            <div class="ordersInformation" *ngIf="items.exisetUser == 0">{{employee}}: {{previousEmployee}} {{items.employeeName}}</div>
+                            <div class="ordersInformation" *ngIf="items.exisetDepartUserAssigned == 1">{{assignedBy}}: {{manager}} {{items.employeeDepartNameAssigned}} </div>
+                            <div class="ordersInformation" *ngIf="items.exisetDepartUserAssigned == 0">{{assignedBy}}: {{previousEmployee}} {{items.employeeDepartNameAssigned}} </div>
+                            <div class="ordersInformation" *ngIf="items.exisetDepartType == 2 && items.exisetDepartUser == 1 && items.lastStatus==0">{{status}} {{items.lastStatusVal}} {{by}}: {{manager}} {{items.employeeDepartName}}</div>
+                            <div class="ordersInformation" *ngIf="items.exisetDepartType == 2 && items.exisetDepartUser == 0 && items.lastStatus==0">{{status}} {{items.lastStatusVal}} {{by}}: {{previousEmployee}} {{items.employeeDepartName}}</div>
+                            <div class="ordersInformation" *ngIf="items.exisetDepartType == 1 && items.exisetDepartUser == 1 && items.lastStatus==1">{{status}} {{items.lastStatusVal}} {{by}}: {{supervisor}} {{items.employeeDepartName}}</div>
+                            <div class="ordersInformation" *ngIf="items.exisetDepartType == 1 && items.exisetDepartUser == 0 && items.lastStatus==1">{{status}} {{items.lastStatusVal}} {{by}}: {{previousEmployee}} {{items.employeeDepartName}}</div>
+                            <div class="ordersInformation" *ngIf="items.exisetDepartType == 2 && items.exisetDepartUser == 1 && items.lastStatus==1">{{status}} {{items.lastStatusVal}} {{by}}: {{manager}} {{items.employeeDepartName}}</div>
+                            <div class="ordersInformation" *ngIf="items.exisetDepartType == 2 && items.exisetDepartUser == 0 && items.lastStatus==1">{{status}} {{items.lastStatusVal}} {{by}}: {{previousEmployee}} {{items.employeeDepartName}}</div>
+                            <div class="ordersInformation" *ngIf="items.exisetDepartType == 1 && items.exisetDepartUser == 1 && items.lastStatus==2">{{status}} {{items.lastStatusVal}} {{by}}: {{supervisor}} {{items.employeeDepartName}}</div>
+                            <div class="ordersInformation" *ngIf="items.exisetDepartType == 1 && items.exisetDepartUser == 0 && items.lastStatus==2">{{status}} {{items.lastStatusVal}} {{by}}: {{previousEmployee}} {{items.employeeDepartName}}</div>
+                            <div class="ordersInformation" *ngIf="items.exisetDepartType == 2 && items.exisetDepartUser == 1 && items.lastStatus==2">{{status}} {{items.lastStatusVal}} {{by}}: {{manager}} {{items.employeeDepartName}}</div>
+                            <div class="ordersInformation" *ngIf="items.exisetDepartType == 2 && items.exisetDepartUser == 0 && items.lastStatus==2">{{status}} {{items.lastStatusVal}} {{by}}: {{previousEmployee}} {{items.employeeDepartName}}</div>
+                            <div class="ordersInformation" *ngIf="items.exisetDepartType == 1 && items.exisetDepartUser == 1 && items.lastStatus==3">{{status}} {{items.lastStatusVal}} {{by}}: {{supervisor}} {{items.employeeDepartName}}</div>
+                            <div class="ordersInformation" *ngIf="items.exisetDepartType == 1 && items.exisetDepartUser == 0 && items.lastStatus==3">{{status}} {{items.lastStatusVal}} {{by}}: {{previousEmployee}} {{items.employeeDepartName}}</div>
+                            <div class="ordersInformation" *ngIf="items.exisetDepartType == 2 && items.exisetDepartUser == 1 && items.lastStatus==3">{{status}} {{items.lastStatusVal}} {{by}}: {{manager}} {{items.employeeDepartName}}</div>
+                            <div class="ordersInformation" *ngIf="items.exisetDepartType == 2 && items.exisetDepartUser == 0 && items.lastStatus==3">{{status}} {{items.lastStatusVal}} {{by}}: {{previousEmployee}} {{items.employeeDepartName}}</div>
+                            <div class="ordersInformation">{{lastStatusTime}}: {{items.lastStatusTime}}</div>
+                        </div>
+                        <div>
+                            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                                <ion-row>
+                                    <ion-col class="textAlignLeft">
+                                     	<div (click)="functionTaskDetails(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:11px">
+                                           <img src="../../assets/imgs/details.png" style="width:30px"><br>{{details}}
+                                        </div>
+                                    </ion-col>
+                                     <ion-col class="textAlignLeft" *ngIf="items.lastStatus==3">
+                                     	<div (click)="functionTaskStart(items.id,items.requestId,i)" style="padding-top:5px; color:#0f75bd; font-size:11px">
+                                           <img src="../../assets/imgs/start.png" style="width:30px"><br>{{start}}
+                                        </div>
+                                    </ion-col>
+                                    <ion-col class="textAlignLeft" *ngIf="items.lastStatus==1">
+                                    	<div (click)="functionTaskHold(items.id,items.requestId,i)" style="padding-top:5px; color:#0f75bd; font-size:11px">
+                                           <img src="../../assets/imgs/onHold.png" style="width:30px"><br>{{onHold}}
+                                        </div>
+                                    </ion-col>
+                                     <ion-col class="textAlignLeft">
+                                     	<div (click)="functionTaskCorrespondence(items.id,i,items.requestId)" style="padding-top:5px; color:#0f75bd; font-size:11px">
+                                           <img src="../../assets/imgs/correspondence.png" style="width:30px"><br>{{correspondence}}
+                                        </div>
+                                    </ion-col>
+                                     <ion-col class="textAlignLeft" *ngIf="items.lastStatus==0 || items.lastStatus==3">
+                                     	<div (click)="functionTaskDelete(items.id,items.requestId,i)" style="padding-top:5px; color:#0f75bd; font-size:11px">
+                                           <img src="../../assets/imgs/delete.png" style="width:30px"><br>{{delete}}
+                                        </div>
+                                    </ion-col>
+                                     <ion-col class="textAlignLeft">
+                                     	<div (click)="functionTaskOperations(items.id,i)" style="padding-top:5px; color:#0f75bd; font-size:11px">
+                                           <img src="../../assets/imgs/operations.png" style="width:30px"><br>{{operations}}
+                                        </div>
+                                    </ion-col>
+                                    
+                                    
+                                    
+                                    <!------for users------->
+                                    
+                                    <!--<ion-col class="textAlignCenter">
+                                        <div style="padding-top:5px">
+                                            <div class="divButtonClass">
+                                                <ion-button class="oneButton fontSize12" (click)="functionDetails(items.id,i)" id="submit">{{details}}</ion-button>
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                     <ion-col class="textAlignCenter">
+                                        <div style="padding-top:5px">
+                                            <div class="divButtonClass">
+                                                <ion-button class="oneButton fontSize12" (click)="functionDetails(items.id,i)" id="submit">{{correspondence}}</ion-button>
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                     <ion-col class="textAlignCenter">
+                                        <div style="padding-top:5px">
+                                            <div class="divButtonClass">
+                                                <ion-button class="oneButton fontSize12" (click)="functionDetails(items.id,i)" id="submit">{{operations}}</ion-button>
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                    <ion-col class="textAlignCenter">
+                                        <div style="padding-top:5px">
+                                            <div class="divButtonClass">
+                                                <ion-button class="oneButton fontSize12" (click)="functionDetails(items.id,i)" id="submit">{{start}}</ion-button>
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                     <ion-col class="textAlignCenter">
+                                        <div style="padding-top:5px">
+                                            <div class="divButtonClass">
+                                                <ion-button class="oneButton fontSize12" (click)="functionDetails(items.id,i)" id="submit">{{finish}}</ion-button>
+                                            </div>
+                                        </div>
+                                    </ion-col>
+                                    -->
+                                    
+                                    
+                                    
+                                    
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+                    </div>
+                    <div *ngIf="items.show == 1" style="width:100%;border-top:2px solid #ccc; margin-top:5px"></div>
+                </div>
+           </div>
+           <div class="divEmptyVal" *ngIf="tasks == 0">
+                <div>
+                    <img src="../../assets/imgs/noData.png" style="width:150px; height:150px">
+                </div>
+                <div class="emptyFirstText">
+                   {{sorry}} 
+                </div>
+                <div class="emptyLastText">
+                    {{sorryReson}}
+                </div>
+            </div>
+     </div>
+     <!--department suberviser-->
+    <ion-footer  class="ion-no-border" style="position:fixed;bottom:0px">
+       <ion-toolbar class="footerToolbar">
+        <div class="width100">
+            <div class="menueClass" (click)="functionHome()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/home.png" style="width:18px"></div>
+            	<div class="labelClass">{{menu5}}</div>
+            </div>
+            <div class="menueClass" (click)="functionAccount()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/information.png" style="width:18px"></div>
+                <div class="labelClass">{{menu7}}</div>
+            </div>
+            <div class="menueClass" [ngStyle]="{'float': float}" style="height:60px">
+            	<div></div>
+            </div>
+             <!--department maneger-->
+            <div class="menueClass" (click)="functionTeam()" [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/team.png" style="width:18px"></div>
+                <div class="labelClass">{{menu8}}</div>
+            </div>
+            <!--department maneger-->
+             <div class="menueClass" (click)="settings()"  [ngStyle]="{'float': float}">
+                <div><img src="../../assets/imgs/setting.png" style="width:18px"></div>
+                <div class="labelClass">{{menu3}}</div>
+            </div>
+        </div>
+        </ion-toolbar>
+    </ion-footer>
+        <div class="addImageCss"><img (click)="functionAddrequest()" src="../../assets/imgs/add.png" class="addImageclass"></div>
+                <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreData($event)">
+        <ion-infinite-scroll-content loadingSpinner="none">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

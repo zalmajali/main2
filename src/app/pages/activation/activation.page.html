@@ -1,0 +1,34 @@
+<ion-content>
+<div style="padding-top:33px" (click)="functionOpenMenue()"><img src="../../assets/imgs/Group871.png" style="width:28px"></div>
+    <div style="margin-top:80px; text-align:center">
+    	<img style="width:125px;" src="../../assets/imgs/Group.png" >
+    </div>
+    <div class="firstTitle fontSize20 fontweight1">
+    	تأكيد رقم الجوال
+    </div>
+<div style="padding-top:50px">
+	<form style="display: contents;" (ngSubmit)="activation()">
+        <div class="paddingBottom">
+            <ion-item lines="none" class="{{errorActiveNumber}}">
+                <ion-input style="border-left:1px solid #B0AFB0;" type="text" [(ngModel)]="activeCode" [ngModelOptions]="{standalone: true}" placeholder="رمز التحقق" (ionInput)="checkActiveNumber($event.target.value)"></ion-input>
+               	<span class="class962" *ngIf='showButton==0'>
+					إعادة إرسال الرمز
+                </span>
+                <span class="class962" *ngIf='showButton==1' style="color:#ED2224" (click)="reSend()">
+					إعادة إرسال الرمز
+                </span>
+            </ion-item>
+            <div class="errorTitle" *ngIf="isErrorActiveNumber == 0">الرجاء إدخال رمز التحقق</div>
+        </div> 
+        <div class="reSendCode" *ngIf='startTime==1'>
+        	يمكنك المحاولة بعد {{counter}} ثانية
+        </div>
+        <div>
+          <div class="divButtonClass">
+            <ion-button class="oneButton fontSize18" (click)="activation()" id="submit" disabled="{{!isdisabled}}"><span style="font-size:15px;padding-top:4px">تأكيد</span></ion-button>
+          </div>
+        </div>
+        <button style="visibility:hidden" id="submit" ion-button type="submit" ></button>
+        </form>
+	</div>
+</ion-content>

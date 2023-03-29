@@ -1,0 +1,124 @@
+<ion-header>
+  <ion-toolbar  class="headerToolbar">
+    <ion-title>
+         <div>
+            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                <ion-row>
+                    <ion-col class="textAlignCenter" size="12" style="padding:0px">
+                    	<div style="font-size:20px;color:#000000">
+                       		{{filterOrders}}
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="startWightCurv">
+        <div class="wightCurv"></div>
+    </div>
+     <div class="allPage">
+      <div class="marginTop20">
+            <form style="display: contents;" (ngSubmit)="functionSearch()">
+            <div class="paddingBottom12">
+                <ion-item [ngStyle]="{'direction': dir}" lines="none">
+                    <ion-input type="text" [(ngModel)]="orderId" [ngModelOptions]="{standalone: true}" placeholder="{{requestNumber}}"></ion-input>
+                </ion-item>
+            </div>
+            <div class="paddingBottom12">
+                <ion-item [ngStyle]="{'direction': dir}" lines="none">
+                    <ion-input type="text" [(ngModel)]="machineNumberVal" [ngModelOptions]="{standalone: true}" placeholder="{{machineNumber}}"></ion-input>
+                </ion-item>
+            </div>
+            <div class="paddingBottom12">
+              <ion-item [ngStyle]="{'direction': dir}" lines="none">
+                <ion-select value="{{urgencySearch}}" mode="ios" placeholder="{{urgency}}" (ionChange) = "changeUrgency($event.target.value)" [ngStyle]="{'direction': dir}" cancelText="{{settingsNo}}" okText="{{settingsYas}}">
+                  <ion-select-option value="0">{{all}}</ion-select-option>
+                  <ion-select-option value="1">{{low}}</ion-select-option>
+                  <ion-select-option value="2">{{medium}}</ion-select-option>
+                  <ion-select-option value="3">{{hight}}</ion-select-option>
+                </ion-select>
+              </ion-item>	
+            </div>
+            <div class="paddingBottom12">
+                <ion-item [ngStyle]="{'direction': dir}" lines="none">
+                    <ion-input type="text" [(ngModel)]="machineDescriptionVal" [ngModelOptions]="{standalone: true}" placeholder="{{machineDescription}}"></ion-input>
+                </ion-item>
+            </div>
+             <div class="paddingBottom12">
+              <ion-item [ngStyle]="{'direction': dir}" lines="none">
+                <ion-select mode="ios" value="{{statusSearch}}" placeholder="{{machineStatus}}" (ionChange) = "changeStatus($event.target.value)" [ngStyle]="{'direction': dir}" cancelText="{{settingsNo}}" okText="{{settingsYas}}">
+                  <ion-select-option value="0">{{all}}</ion-select-option>
+                  <ion-select-option value="1">{{working}}</ion-select-option>
+                  <ion-select-option value="2">{{notWorking}}</ion-select-option>
+                </ion-select>
+              </ion-item>	
+            </div>
+             <div class="paddingBottom12">
+                <ion-item [ngStyle]="{'direction': dir}" lines="none">
+                     <ion-input type="text" [(ngModel)]="faultDescriptionVal" [ngModelOptions]="{standalone: true}" placeholder="{{faultDescription}}"></ion-input>
+                </ion-item>
+            </div>
+             <div class="paddingBottom12">
+              <ion-item [ngStyle]="{'direction': dir}" lines="none">
+                <ion-select mode="ios" value="{{attachments}}" placeholder="{{files}}" (ionChange) = "changeAttachments($event.target.value)" [ngStyle]="{'direction': dir}" cancelText="{{settingsNo}}" okText="{{settingsYas}}">
+                   <ion-select-option value="0">{{all}}</ion-select-option>
+                  <ion-select-option value="1">{{withAttachments}}</ion-select-option>
+                  <ion-select-option value="2">{{withoutAttachments}}</ion-select-option>
+                </ion-select>
+              </ion-item>	
+            </div>
+             <div class="paddingBottom12" *ngIf="(getDataByUser==2 || getDataByUser==5) && departments !=0">
+             <ion-item [ngStyle]="{'direction': dir}" lines="none">
+                <ion-select mode="ios" value="{{departmentSearchId}}" placeholder="{{departmentName}}" (ionChange) = "selectDepartmentName($event.target.value)" [ngStyle]="{'direction': dir}" cancelText="{{settingsNo}}" okText="{{settingsYas}}">
+                   <ion-select-option *ngFor="let items of returnDepartmentsArray" value="{{items.id}}">{{items.name}}</ion-select-option>
+                </ion-select>
+              </ion-item>	
+            </div>
+            <div class="paddingBottom12" *ngIf="getDataByUser==1 && employees!=0">
+             <ion-item [ngStyle]="{'direction': dir}" lines="none">
+                <ion-select mode="ios" value="{{suberViserSearchName}}" placeholder="{{issuerName}}" (ionChange) = "selectIssuerName($event.target.value)" [ngStyle]="{'direction': dir}" cancelText="{{settingsNo}}" okText="{{settingsYas}}">
+                  <ion-select-option [ngStyle]="{'direction': dir}" *ngFor="let items of returnEmployeesArray" value="{{items.id}}">{{items.type}}: {{items.fullName}}</ion-select-option>
+                </ion-select>
+              </ion-item>	
+            </div>
+            <div class="paddingBottom12">
+            <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                <ion-row>
+                    <ion-col class="textAlignStart" size="6" style="padding:0px 3px 0px 3px">
+                        <ion-item [ngStyle]="{'direction': dir}" lines="none">
+                            <ion-datetime mode="ios" value="{{fromSelectDate}}" (ionChange) = "changeFrom($event.target.value)" placeholder="{{fromDate}}" displayFormat="MM/DD/YYYY" monthShortNames="01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12" min="2022" cancelText="{{settingsNo}}" doneText="{{settingsYas}}"></ion-datetime>
+                        </ion-item>
+                    </ion-col>
+                     <ion-col class="textAlignStart" size="6" style="padding:0px 3px 0px 3px">
+                    	<ion-item [ngStyle]="{'direction': dir}" lines="none">
+                			<ion-datetime mode="ios" value="{{toSelectDate}}" (ionChange) = "changeTo($event.target.value)" placeholder="{{toDate}}" displayFormat="MM/DD/YYYY" monthShortNames="01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12" min="2022" cancelText="{{settingsNo}}" doneText="{{settingsYas}}"></ion-datetime>
+                		</ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            </div>            
+             <div>
+                 <ion-grid [ngStyle]="{'direction': dir}" style="padding-bottom:0px">
+                    <ion-row>
+                         <ion-col class="textAlignCenter">
+                            <div class="divButtonClass">
+                                <ion-button class="oneButton fontSize14" (click)="functionSearch()" id="submit">{{search}}</ion-button>
+                              </div>
+                        </ion-col>
+                        
+                        <ion-col class="textAlignCenter">
+                            <div class="divButtonClass">
+                                <ion-button class="oneButton fontSize14" (click)="closeModel()" id="submit">{{cancel}}</ion-button>
+                              </div>
+                        </ion-col> 
+                    </ion-row>
+                </ion-grid>
+            </div>
+            <button style="visibility:hidden" id="submit" ion-button type="submit" ></button>
+            </form>
+        </div>
+     </div>
+</ion-content>
